@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Database Assignment 1</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    </h:head>
+    <h:body>
+        <h1 id="main_heading">
+            Database Homework 1
+        </h1>
+        <h2>
+            #{queryController.demoTitle}
+        </h2>
+        <p>
+            The salary is #{queryController.salary}
+            The annual salary is #{queryController.anualSalary}
+        </p>
+        <h:form>
+            
+            <div name="question">
+                <p id="question1">
+                    List all students (ids and names) in CS department.
+                </p>
+                <h:panelGrid columns="3">
+                    <h:outputLabel id="deptname" value="Department Name:"/>
+                    <h:inputText value="#{queryController.departmentName}"/>
+                    <h:commandButton id="btnDeptName" value="Search student by Department" action="#{queryController.searchStudentByDepartment}">
+                       
+                    </h:commandButton>
+                </h:panelGrid>
+                <h:panelGrid id="question1output" >
+                   <h:outputLabel value="#{queryController.message}" rendered="#{queryController.studentByDepartment}" />
+                 <h:dataTable border="1" rendered="#{queryController.studentByDepartment}"
+                             value="#{queryController.students}" var="student"
+                             title="#{queryController.departmentName}"
+                             styleClass="queryTable"
+                             headerClass="queryTableHeader"
+                             rowClasses="queryTableOddRow,queryTableEvenRow" >
+                    <h:column >
+                        <f:facet name="header">ID</f:facet>
+                            #{student.id}
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">Name</f:facet>
+                            #{student.name}
+                    </h:column>
+
+
+
+                </h:dataTable>
+                </h:panelGrid>
+               
+            </div>
+            <div name="question">
+                <p id="question2">
+                    List all courses (cNos and titles) \Ef" has taken, and passed with a grade of \A" or \B".
+                </p>
+                <h:panelGrid columns="3">
+                    <h:outputLabel id="studentname" value="Student Name(Passed with A or B):"/>
+                    <h:inputText value="#{queryController.studentName}"/>
+                    <h:commandButton id="btnCourse" value="Find Courses" 
+                                     action="#{queryController.searchCourseByStudentName()}">
+                       
+                    </h:commandButton>
+                </h:panelGrid>
+                <h:panelGrid id="question2output" >
+                <h:outputLabel value="#{queryController.message}" rendered="#{queryController.courseByStudent}" />
+                <h:dataTable border="1" rendered="#{queryController.courseByStudent}"
+                             value="#{queryController.students}" var="student"
+                             title="#{queryController.departmentName}"
+                             styleClass="queryTable"
+                             headerClass="queryTableHeader"
+                             rowClasses="queryTableOddRow,queryTableEvenRow" >
+
+                    <h:column >
+                        <f:facet name="header">Course Number</f:facet>
+                            #{student.cno}
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">Course Name</f:facet>
+                            #{student.title}
+                    </h:column>
+                </h:dataTable>
+                </h:panelGrid>
+            </div>
+            <div>
+                <p id="question3">
+                    List students in CS department, and for each student list the total credit-hours the student has taken (hence,
+                    the output table has three columns: id, name, total credits).
+                </p>
+                <h:panelGrid columns="3">
+                    <h:outputLabel id="dept_total" value="Department Name(For students total Credit):"/>
+                    <h:inputText value="#{queryController.deptName}"/>
+                    <h:commandButton id="btnTotalCredit" value="Find Total Credit" 
+                                     action="#{queryController.searchStudentWithTotalByDepartment()}">
+                       
+                    </h:commandButton>
+
+                </h:panelGrid>
+                <h:panelGrid id="question3output" >
+                    <h:outputLabel value="#{queryController.message}" rendered="#{queryController.totalCreditDisplay}" />
+                    <h:dataTable border="1" rendered="#{queryController.totalCreditDisplay}"
+                                 value="#{queryController.students}" var="student"
+                                 title="#{queryController.departmentName}"
+                                 styleClass="queryTable"
+                                 headerClass="queryTableHeader"
+                                 rowClasses="queryTableOddRow,queryTableEvenRow" >
+
+                        <h:column >
+                            <f:facet name="header">Student Id.</f:facet>
+                                #{student.id}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Student Name</f:facet>
+                                #{student.name}
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">Total Credit</f:facet>
+                                #{student.totalCredit}
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </div>
+
+        </h:form>
+
+    </h:body>
+</html>
+
