@@ -10,8 +10,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     </h:head>
     <h:body>
+         <h:form>
         <h1 id="main_heading">
-            Database Homework 1
+            #{Language.valueOf.applicationName}
+            <h:selectOneRadio value="#{Language.selectedLanguage}">
+                        <f:ajax event="click" listener="#{Language.onLanguageChange()}"
+                                render="@form"/>
+                        <f:selectItems value="#{Language.languageList}"/>
+                    </h:selectOneRadio>
         </h1>
         <h2>
             #{queryController.demoTitle}
@@ -20,7 +26,7 @@
             The salary is #{queryController.salary}
             The annual salary is #{queryController.anualSalary}
         </p>
-        <h:form>
+       
             
             <div name="question">
                 <p id="question1">
