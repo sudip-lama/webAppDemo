@@ -20,8 +20,14 @@
                     </h:selectOneRadio>
         </h1>
         <h2>
-            #{queryController.demoTitle}
+            #{queryController.demoTitle}<br/>
+            #{queryController.messageService.getGreetingMessage()}
         </h2>
+            <h:commandLink value="Student Info"
+                                               action="studentInfo"
+                                               immediate="true"
+                    style="padding-left: 10px;"/>
+ 
         <p>
             The salary is #{queryController.salary}
             The annual salary is #{queryController.anualSalary}

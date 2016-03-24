@@ -7,19 +7,25 @@ package db.assignment1.controller;
 
 import db.assignment1.db.StudentServices;
 import db.assignment1.model.Student;
+import db.assignment1.service.MessageService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author SUDIP
  */
+@Component
 @ManagedBean
 @ViewScoped
 public class QueryController {
+    @Autowired
+    private MessageService messageService;
     private String title="Database !!!";
     private StudentServices studentService =new StudentServices();
     private List<Student> students;
@@ -212,5 +218,13 @@ public class QueryController {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public MessageService getMessageService() {
+        return messageService;
+    }
+
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
     }
 }
