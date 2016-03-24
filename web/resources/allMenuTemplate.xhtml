@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+       
+        <title><ui:insert name="title">#{Language.valueOf.applicationName}</ui:insert></title>
+
+       
+
+    </h:head>
+
+    <h:body>
+        <div id="top">
+            <h:form id="mainHeaderForm"> 
+
+                    <div id="language-menu">
+                        <h:panelGrid columns="1" styleClass="headerToolBar-menu">
+
+                           
+
+                            <h:panelGrid columns="5">
+                               
+                               
+
+                                <h:selectOneRadio value="#{Language.selectedLanguage}">
+                                    <f:ajax event="click" listener="#{Language.onLanguageChange()}"
+                                            render="@all"/>
+                                    <f:selectItems value="#{Language.languageList}"/>
+                                </h:selectOneRadio>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </div>
+
+             <h:commandLink value="PatientManagement"
+                                               action="patientMangementRedirect"
+                                               immediate="true"
+                    style="padding-left: 10px;"/>       
+                          
+                     
+            </h:form>
+        </div>
+
+        <div id="metadata" class="center_content">
+            <ui:insert name="metadata"></ui:insert>
+        </div>
+
+        <div id="javascript" class="center_content">
+            <ui:insert name="javascript"></ui:insert>
+        </div>
+
+        <div id="stylesheet" class="center_content">
+            <ui:insert name="stylesheet"></ui:insert>
+        </div>
+
+        <div id="content" class="center_content" style="min-height: 480px">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom" align="right">
+            <h:outputText styleClass="footer-text" value="#{Language.valueOf.footer}" />
+        </div>
+
+    </h:body>
+
+</html>

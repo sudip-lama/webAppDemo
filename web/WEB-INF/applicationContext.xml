@@ -23,7 +23,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver">
                 
         </property>
-        <property name="url" value="jdbc:mysql://localhost/database_course">
+        <property name="url" value="jdbc:mysql://localhost/hospital_manage">
                 
          </property>
          <property name="username" value="root">
