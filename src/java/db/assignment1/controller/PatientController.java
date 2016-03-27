@@ -10,6 +10,9 @@ import db.assignment1.service.PatientService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.ArrayDataModel;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +33,7 @@ public class PatientController {
     private int patientId;
     private String message;
     private boolean edit=false;
+    private DataModel<Patient> patientList;
     
     /**
      * Creates a new instance of PatientController
@@ -82,6 +86,18 @@ public class PatientController {
         return patients;
     }
 
+    public DataModel<Patient> getPatientList() {
+        if(patientList!=null)
+        {
+            patientList=new ListDataModel<Patient>(patientService.getAllPatient());
+        }
+        return patientList;
+    }
+
+    public void setPatientList(DataModel<Patient> patientList) {
+        this.patientList = patientList;
+    }
+    
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
     }

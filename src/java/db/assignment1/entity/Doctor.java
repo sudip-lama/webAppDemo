@@ -5,53 +5,34 @@
  */
 package db.assignment1.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 
 /**
  *
  * @author SUDIP
  */
-
-public class Patient implements Serializable {
-    
+public class Doctor {
     private int id;
-   
+    
     private String name;
     
-   
-    private Date dob;
+    private String specialist;
     
-
     private String address;
     
     private String phone;
-
     
+    private boolean deleteStatus;
+
     private List<PatientVisit> patientVisit=new ArrayList<>();
     
-
-    private boolean deleteStatus;
-    
-    public Patient() {
+    public Doctor() {
     }
 
-    public Patient(int id, String name, Date dob, String address, String phone) {
-        this.id = id;
+    public Doctor(String name, String specialist, String address, String phone) {
         this.name = name;
-        this.dob = dob;
-        this.address = address;
-        this.phone = phone;
-    }
-
-   
-
-    public Patient(String name, Date dob, String address, String phone) {
-        this.name = name;
-        this.dob = dob;
+        this.specialist = specialist;
         this.address = address;
         this.phone = phone;
     }
@@ -72,12 +53,12 @@ public class Patient implements Serializable {
         this.name = name;
     }
 
-    public Date getDob() {
-        return dob;
+    public String getSpecialist() {
+        return specialist;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setSpecialist(String specialist) {
+        this.specialist = specialist;
     }
 
     public String getAddress() {
@@ -112,6 +93,5 @@ public class Patient implements Serializable {
         this.patientVisit = patientVisit;
     }
     
-     
-     
+    
 }

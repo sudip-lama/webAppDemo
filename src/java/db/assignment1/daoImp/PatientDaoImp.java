@@ -7,7 +7,6 @@ package db.assignment1.daoImp;
 
 import db.assignment1.dao.PatientDao;
 import db.assignment1.entity.Patient;
-import db.assignment1.model.Student;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -30,18 +29,18 @@ public class PatientDaoImp implements PatientDao{
     @Override
     public int createPatientRecord(Patient patient) {
         String sql = "INSERT INTO PATIENT_DETAIL ( PATIENT_NAME ,"
-                + " DATE_OF_BIRTH , PATIENT_ADDRESS , PATIENT_PHONE ) "
-                + "VALUES ( ? , ? , ? , ? ) ";
+                + " DATE_OF_BIRTH , PATIENT_ADDRESS , PATIENT_PHONE , DELETE_STATUS ) "
+                + "VALUES ( ? , ? , ? , ? , FALSE) ";
         Object [] params=new Object[]{patient.getName(),patient.getDob(),
             patient.getAddress(),patient.getPhone()};
-        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.INTEGER};
+        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR};
           return jdbcTemplate.update(sql, params, types);
     }
 
     @Override
     public List<Patient> getAllPatient() {
         List<Patient> patients = new ArrayList<>();
-                String sql = "SELECT * FROM PATIENT_DETAIL ";
+                String sql = "SELECT * FROM PATIENT_DETAIL WHERE DELETE_STATUS = FALSE";
                 
                 patients=jdbcTemplate.query(sql,
                         new RowMapper<Patient>() {
@@ -51,7 +50,7 @@ public class PatientDaoImp implements PatientDao{
                Patient patient=new Patient( rs.getInt("PATIENT_ID"),
                        rs.getString("PATIENT_NAME"),
                        rs.getDate("DATE_OF_BIRTH"),
-                       rs.getString("PATIENT_ADDRESS"),rs.getInt("PATIENT_PHONE"));
+                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
                return patient;
            }
        });
@@ -60,7 +59,8 @@ public class PatientDaoImp implements PatientDao{
     @Override
     public Patient getPatientById(Integer patientId) {
         Patient patient = null;
-                String sql = "SELECT * FROM PATIENT_DETAIL WHERE PATIENT_ID = ? ";
+                String sql = "SELECT * FROM PATIENT_DETAIL WHERE PATIENT_ID = ? "
+                        + " AND DELETE_STATUS = FALSE";
                 
                 patient=jdbcTemplate.queryForObject(sql,new Object[]{patientId},
                         new RowMapper<Patient>() {
@@ -70,7 +70,7 @@ public class PatientDaoImp implements PatientDao{
                Patient patient=new Patient( rs.getInt("PATIENT_ID"),
                        rs.getString("PATIENT_NAME"),
                        rs.getDate("DATE_OF_BIRTH"),
-                       rs.getString("PATIENT_ADDRESS"),rs.getInt("PATIENT_PHONE"));
+                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
                return patient;
            }
        });
