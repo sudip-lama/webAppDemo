@@ -16,6 +16,6 @@ import java.util.List;
 public interface DoctorDao {
     public int createDoctorRecord(Doctor doctor);
     public List<Doctor> getAllDoctor();
-    public Patient getDoctorById(Integer doctorId);
+    public Doctor getDoctorById(Integer doctorId);
     public int update(Doctor doctor);
 }

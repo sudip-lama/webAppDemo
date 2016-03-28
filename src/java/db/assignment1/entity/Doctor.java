@@ -7,6 +7,7 @@ package db.assignment1.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,6 +30,15 @@ public class Doctor {
     
     public Doctor() {
     }
+
+    public Doctor(int id, String name, String specialist, String address, String phone) {
+        this.id = id;
+        this.name = name;
+        this.specialist = specialist;
+        this.address = address;
+        this.phone = phone;
+    }
+   
 
     public Doctor(String name, String specialist, String address, String phone) {
         this.name = name;
