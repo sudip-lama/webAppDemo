@@ -13,7 +13,7 @@
                 Patient Detail
             </ui:define>
             <ui:define name="content">
-                <h:form id="roleManagementForm">
+                <h:form id="patientManagementForm">
                     <h:outputLabel value="#{patientController.message}"/>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{Language.valueOf.patientName}"  />
@@ -51,18 +51,18 @@
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
                                          action="patientMangementRedirect" />
                     </h:panelGrid>
-
-                    <h:panelGroup>
+                        
+                    <h:panelGroup >
                         <h:dataTable id="patientList" var="patient" rows="10"
                                      border="1"
-                                    
-                                 value="#{patientController.patientList}"
+                                     
+                                     value="#{patientController.patientList}"
                                  >
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}" />
+                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
@@ -91,7 +91,17 @@
                                 </f:facet>
                                 <h:outputLabel value="#{patient.phone}" />
                             </h:column>
-
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.edit}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="Edit">
+                                            <f:ajax event="click" listener="#{patientController.getPatientForEdit()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
                         </h:dataTable>
                     </h:panelGroup>
 

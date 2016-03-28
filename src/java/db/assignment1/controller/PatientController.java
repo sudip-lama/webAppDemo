@@ -54,9 +54,41 @@ public class PatientController {
            {
                message="Error creating Patient Record";
            }
+           
         }
+        else
+        {
+            if(patientService.updatePatientRecord(patient))
+            {
+                message=patient.getName()+" patient Record Updated";
+               patient=null;
+            }
+            else
+            {
+            
+               message="Error updating Patient Record";
+            }
+            
+            
+        }
+        edit=false;
+        patientList=null;
         return null;
     }
+    
+        public String getPatientForEdit() {
+        try {
+            patient = (Patient) patientList.getRowData();
+            patientList = null;
+            edit = true;
+            message="";
+        } catch (Exception e) {
+            e.printStackTrace();
+            message="Patient couldn't be retrieved.";
+        }
+        return null;
+        }
+
     public PatientService getPatientService() {
         return patientService;
     }
@@ -87,9 +119,9 @@ public class PatientController {
     }
 
     public DataModel<Patient> getPatientList() {
-        if(patientList!=null)
+        if(patientList==null)
         {
-            patientList=new ListDataModel<Patient>(patientService.getAllPatient());
+            patientList=new ListDataModel<>(patientService.getAllPatient());
         }
         return patientList;
     }

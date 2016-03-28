@@ -30,7 +30,7 @@ public class PatientDaoImp implements PatientDao{
     public int createPatientRecord(Patient patient) {
         String sql = "INSERT INTO PATIENT_DETAIL ( PATIENT_NAME ,"
                 + " DATE_OF_BIRTH , PATIENT_ADDRESS , PATIENT_PHONE , DELETE_STATUS ) "
-                + "VALUES ( ? , ? , ? , ? , FALSE) ";
+                + "VALUES ( ? , ? , ? , ? , 0) ";
         Object [] params=new Object[]{patient.getName(),patient.getDob(),
             patient.getAddress(),patient.getPhone()};
         int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR};
@@ -40,7 +40,7 @@ public class PatientDaoImp implements PatientDao{
     @Override
     public List<Patient> getAllPatient() {
         List<Patient> patients = new ArrayList<>();
-                String sql = "SELECT * FROM PATIENT_DETAIL WHERE DELETE_STATUS = FALSE";
+                String sql = "SELECT * FROM PATIENT_DETAIL WHERE DELETE_STATUS = 0";
                 
                 patients=jdbcTemplate.query(sql,
                         new RowMapper<Patient>() {
@@ -60,7 +60,7 @@ public class PatientDaoImp implements PatientDao{
     public Patient getPatientById(Integer patientId) {
         Patient patient = null;
                 String sql = "SELECT * FROM PATIENT_DETAIL WHERE PATIENT_ID = ? "
-                        + " AND DELETE_STATUS = FALSE";
+                        + " AND DELETE_STATUS = 0";
                 
                 patient=jdbcTemplate.queryForObject(sql,new Object[]{patientId},
                         new RowMapper<Patient>() {
@@ -83,6 +83,20 @@ public class PatientDaoImp implements PatientDao{
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public int update(Patient patient) {
+        String sql = "UPDATE  PATIENT_DETAIL "
+                + " SET PATIENT_NAME = ? ,"
+                + " DATE_OF_BIRTH = ? , "
+                + " PATIENT_ADDRESS = ? ,"
+                + " PATIENT_PHONE = ? "
+                + " WHERE PATIENT_ID = ? ";
+        Object [] params=new Object[]{patient.getName(),patient.getDob(),
+            patient.getAddress(),patient.getPhone(),patient.getId()};
+        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR,Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types);
     }
     
 }

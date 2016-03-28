@@ -5,6 +5,7 @@
  */
 package db.assignment1.dao;
 
+import db.assignment1.entity.Doctor;
 import db.assignment1.entity.Patient;
 import java.util.List;
 
@@ -12,10 +13,9 @@ import java.util.List;
  *
  * @author SUDIP
  */
-public interface PatientDao {
-  
-    public int createPatientRecord(Patient patient);
-    public List<Patient> getAllPatient();
-    public Patient getPatientById(Integer patientId);
-    public int update(Patient patient);
+public interface DoctorDao {
+    public int createDoctorRecord(Doctor doctor);
+    public List<Doctor> getAllDoctor();
+    public Patient getDoctorById(Integer doctorId);
+    public int update(Doctor doctor);
 }

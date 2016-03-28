@@ -16,4 +16,5 @@ public interface PatientService {
     public boolean createPatientRecord(Patient patient);
     public List<Patient> getAllPatient();
     public Patient getPatientById(Integer patientId);
+    public boolean updatePatientRecord(Patient patient);
 }

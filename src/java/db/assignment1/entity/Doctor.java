@@ -23,7 +23,7 @@ public class Doctor {
     
     private String phone;
     
-    private boolean deleteStatus;
+   
 
     private List<PatientVisit> patientVisit=new ArrayList<>();
     
@@ -77,13 +77,7 @@ public class Doctor {
         this.phone = phone;
     }
 
-    public boolean isDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(boolean deleteStatus) {
-        this.deleteStatus = deleteStatus;
-    }
+    
 
     public List<PatientVisit> getPatientVisit() {
         return patientVisit;

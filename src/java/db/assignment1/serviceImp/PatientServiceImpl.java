@@ -46,5 +46,11 @@ public class PatientServiceImpl implements PatientService{
     public void setPatientDaoImp(PatientDaoImp patientDaoImp) {
         this.patientDaoImp = patientDaoImp;
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public boolean updatePatientRecord(Patient patient) {
+      return patientDaoImp.update(patient)>0?true:false;
+    }
     
 }
