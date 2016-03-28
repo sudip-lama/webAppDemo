@@ -30,7 +30,7 @@ public class DoctorDaoImp implements DoctorDao{
     @Override
     public int createDoctorRecord(Doctor doctor) {
          String sql = "INSERT INTO DOCTOR_DETAIL ( DOCTOR_NAME ,"
-                + " DOCTOR_SPECIALIST, DOCTOR_ADDRESS , PATIENT_PHONE , DELETE_STATUS ) "
+                + " DOCTOR_SPECIALIST, DOCTOR_ADDRESS , DOCTOR_PHONE , DELETE_STATUS ) "
                 + "VALUES ( ? , ? , ? , ? , 0) ";
         Object [] params=new Object[]{doctor.getName(),doctor.getSpecialist(),
             doctor.getAddress(),doctor.getPhone()};

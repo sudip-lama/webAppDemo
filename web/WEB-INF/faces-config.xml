@@ -32,4 +32,18 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>doctorMangement</from-outcome>
+            <to-view-id>/pages/doctor/DoctorManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>doctorMangementRedirect</from-outcome>
+            <to-view-id>/pages/doctor/DoctorManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
