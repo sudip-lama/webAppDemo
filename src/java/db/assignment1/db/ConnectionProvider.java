@@ -18,7 +18,7 @@ public class ConnectionProvider {
            Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager
                     .getConnection("jdbc:mysql://localhost/database_course",
-                            "root",""); 
+                            "root","maha22"); 
         } catch (Exception ex) {
             
             System.out.println("Error in Database Connection");
