@@ -32,6 +32,19 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>patientVisitMangement</from-outcome>
+            <to-view-id>/pages/patient/PatientVisitManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>patientVisitMangementRedirect</from-outcome>
+            <to-view-id>/pages/patient/PatientVisitManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
     
     <navigation-rule>
         <navigation-case>

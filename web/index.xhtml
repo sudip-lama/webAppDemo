@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:head>
@@ -10,35 +11,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     </h:head>
     <h:body>
-         <h:form>
-        <h1 id="main_heading">
-            #{Language.valueOf.applicationName}
-            <h:selectOneRadio value="#{Language.selectedLanguage}">
-                        <f:ajax event="click" listener="#{Language.onLanguageChange()}"
-                                render="@form"/>
-                        <f:selectItems value="#{Language.languageList}"/>
-                    </h:selectOneRadio>
-        </h1>
-        <h2>
-          Main Index
-        </h2>
-            <h:commandLink value="Student Info"
-                                               action="studentInfo"
-                                               immediate="true"
-                    style="padding-left: 10px;"/>
-            <br/>
-            <h:commandLink value="PatientManagement"
-                                               action="patientMangementRedirect"
-                                               immediate="true"
-                    style="padding-left: 10px;"/>     
-            <h:commandLink value="DoctorManagement"
-                                               action="doctorMangementRedirect"
-                                               immediate="true"
-                    style="padding-left: 10px;"/>       
-                                  
-        
-      
-        </h:form>
+          <ui:composition template="/resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.applicationName}
+            </ui:define>
+            <ui:define name="content">
+                #{Language.valueOf.applicationName}
+            </ui:define>
+        </ui:composition>
 
     </h:body>
 </html>

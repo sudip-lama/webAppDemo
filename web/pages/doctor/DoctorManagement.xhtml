@@ -15,7 +15,7 @@
             <ui:define name="content">
                 <h:form id="doctorManagementForm">
                     <h:outputLabel value="#{doctorController.message}"/>
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="3" >
                         <h:outputLabel value="#{Language.valueOf.doctorName}"  />
                         <h:inputText value="#{doctorController.doctor.name}" id="name"
                                      styleClass="required" />
@@ -35,10 +35,16 @@
                                    styleClass="requiredErrorClass" />
 
                         <h:outputLabel value="#{Language.valueOf.specialist}"  />
+                        <h:selectOneMenu id="specialist" value="#{doctorController.doctor.specialist}" 
+                                                 >
+                            <f:selectItems value="#{doctorController.specialistSelectItem}" />
+                                   
+                         </h:selectOneMenu>
+                        <!--
                         <h:inputText value="#{doctorController.doctor.specialist}"
                                      id="specialist" styleClass="required" >
                             
-                        </h:inputText>
+                        </h:inputText>-->
                         <h:message for="specialist"
                                    styleClass="requiredErrorClass" />
                     </h:panelGrid>

@@ -18,4 +18,5 @@ public interface PatientDao {
     public List<Patient> getAllPatient();
     public Patient getPatientById(Integer patientId);
     public int update(Patient patient);
+    public List<Patient> getAllPatientByPatientName(String patientName);
 }

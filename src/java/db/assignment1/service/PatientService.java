@@ -17,4 +17,5 @@ public interface PatientService {
     public List<Patient> getAllPatient();
     public Patient getPatientById(Integer patientId);
     public boolean updatePatientRecord(Patient patient);
+    public List<Patient> getAllPatientByPatientName(String patientName);
 }

@@ -52,5 +52,11 @@ public class PatientServiceImpl implements PatientService{
     public boolean updatePatientRecord(Patient patient) {
       return patientDaoImp.update(patient)>0?true:false;
     }
+
+    @Override
+    public List<Patient> getAllPatientByPatientName(String patientName) {
+    
+        return patientDaoImp.getAllPatientByPatientName(patientName);
+    }
     
 }

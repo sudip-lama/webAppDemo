@@ -121,8 +121,9 @@ public class PatientController {
     public DataModel<Patient> getPatientList() {
         if(patientList==null)
         {
-            patientList=new ListDataModel<>(patientService.getAllPatient());
-        }
+           patientList=new ListDataModel<>(patientService.getAllPatient());
+           
+            }
         return patientList;
     }
 

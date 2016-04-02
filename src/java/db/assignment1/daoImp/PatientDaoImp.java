@@ -58,11 +58,11 @@ public class PatientDaoImp implements PatientDao{
 
     @Override
     public Patient getPatientById(Integer patientId) {
-        Patient patient = null;
+        List<Patient> patients = null;
                 String sql = "SELECT * FROM PATIENT_DETAIL WHERE PATIENT_ID = ? "
                         + " AND DELETE_STATUS = 0";
                 
-                patient=jdbcTemplate.queryForObject(sql,new Object[]{patientId},
+             patients=jdbcTemplate.query(sql,new Object[]{patientId},
                         new RowMapper<Patient>() {
 
            @Override
@@ -73,8 +73,15 @@ public class PatientDaoImp implements PatientDao{
                        rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
                return patient;
            }
-       });
-               return patient;
+                        });
+             
+             
+             
+           if(patients.isEmpty())
+               return null;
+           else
+               return patients.get(0);
+           
     }
 
     public JdbcTemplate getJdbcTemplate() {
@@ -98,5 +105,28 @@ public class PatientDaoImp implements PatientDao{
         int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR,Types.INTEGER};
      return jdbcTemplate.update(sql, params, types);
     }
+
+    @Override
+    public List<Patient> getAllPatientByPatientName(String patientName) {
+        List<Patient> patients = new ArrayList<>();
+                patientName="'%"+patientName+"%'";
+                String sql = "SELECT * FROM PATIENT_DETAIL WHERE"
+                        + " PATIENT_NAME LIKE  "+patientName
+                        + " AND DELETE_STATUS = 0";
+                patientName="'%"+patientName+"%'";
+                int [] types=new int[]{Types.VARCHAR};
+                patients=jdbcTemplate.query(sql,
+                        new RowMapper<Patient>() {
+
+           @Override
+           public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
+               Patient patient=new Patient( rs.getInt("PATIENT_ID"),
+                       rs.getString("PATIENT_NAME"),
+                       rs.getDate("DATE_OF_BIRTH"),
+                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
+               return patient;
+           }
+       });
+               return patients;}
     
 }

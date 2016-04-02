@@ -18,7 +18,7 @@
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{Language.valueOf.patientName}"  />
                         <h:inputText value="#{patientController.patient.name}" id="name"
-                                     styleClass="required" />
+                                     styleClass="required"  />
                         <h:message for="name"
                                    styleClass="requiredErrorClass" />
 
@@ -35,10 +35,11 @@
                                    styleClass="requiredErrorClass" />
 
                         <h:outputLabel value="#{Language.valueOf.dob}"  />
-                        <h:inputText value="#{patientController.patient.dob}(MM-DD-YYYY)"
+                        <h:inputText value="#{patientController.patient.dob}"
                                      id="dob" styleClass="required" >
                             <f:convertDateTime pattern="MM-dd-yyyy"/>
                         </h:inputText>
+                        <h:outputLabel value="(MM-DD-YYYY)"  />
                         <h:message for="dob"
                                    styleClass="requiredErrorClass" />
                     </h:panelGrid>
