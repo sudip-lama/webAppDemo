@@ -77,6 +77,7 @@
     
     <navigation-rule>
         <navigation-case>
+
             <from-outcome>searchPatientVisitByDoctor</from-outcome>
             <to-view-id>/pages/patient/SearchPatientVisitByDoctor.xhtml</to-view-id>
         </navigation-case>
@@ -89,5 +90,47 @@
         </navigation-case>
     </navigation-rule>
     
+<navigation-rule>
+        <navigation-case>
+            <from-outcome>roomMangement</from-outcome>
+            <to-view-id>/pages/room/RoomManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>roomMangementRedirect</from-outcome>
+            <to-view-id>/pages/room/RoomManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+        <navigation-case>
+            <from-outcome>diseaseMangement</from-outcome>
+            <to-view-id>/pages/disease/DiseaseManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>diseaseMangementRedirect</from-outcome>
+            <to-view-id>/pages/disease/DiseaseManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>billMangement</from-outcome>
+            <to-view-id>/pages/bill/BillManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>billMangementRedirect</from-outcome>
+            <to-view-id>/pages/bill/BillManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
     
 </faces-config>

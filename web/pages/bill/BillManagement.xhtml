@@ -10,95 +10,102 @@
     <h:body>
         <ui:composition template="./../../resources/allMenuTemplate.xhtml">
             <ui:define name="title">
-                #{Language.valueOf.patientTitle}
+                #{Language.valueOf.billTitle}
             </ui:define>
             <ui:define name="content">
-                <h:form id="patientManagementForm">
-                    <h:outputLabel value="#{patientController.message}"/>
+                <h:form id="billManagementForm">
+                    <h:outputLabel value="#{billController.message}"/>
                     <h:panelGrid columns="3">
-                        <h:outputLabel value="#{Language.valueOf.patientName}"  />
-                        <h:inputText value="#{patientController.patient.name}" id="name"
-                                     styleClass="required"  />
-                        <h:message for="name"
+                        <h:outputLabel value="#{Language.valueOf.billNumber}"  />
+                        <h:inputText value="#{billController.bill.billNumber}" id="billNumber"
+                                     styleClass="required" />
+                        <h:message for="billNumber"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.address}"  />
-                        <h:inputText value="#{patientController.patient.address}"
-                                     id="address" styleClass="required" />
-                        <h:message for="address"
+                        <h:outputLabel value="#{Language.valueOf.billDate}"  />
+                        <h:inputText value="#{billController.bill.billDate}"
+                                     id="billDate" styleClass="required" />
+                        <h:message for="billDate"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.phone}"  />
-                        <h:inputText value="#{patientController.patient.phone}"
-                                     id="phone" styleClass="required" />
-                        <h:message for="phone"
+                        <h:outputLabel value="#{Language.valueOf.total}"  />
+                        <h:inputText value="#{billController.bill.total}"
+                                     id="total" styleClass="required" />
+                        <h:message for="total"
+                                   styleClass="requiredErrorClass" />
+                        
+                        <h:outputLabel value="#{Language.valueOf.preparedBy}"  />
+                        <h:inputText value="#{billController.bill.preparedBy}" id="preparedBy"
+                                     styleClass="required" />
+                        <h:message for="preparedBy"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.dob}(MM-DD-YYYY)"  />
-                        <h:inputText value="#{patientController.patient.dob}"
-                                     id="dob" styleClass="required" >
-                            <f:convertDateTime pattern="MM-dd-yyyy"/>
-                        </h:inputText>
-                        <h:outputLabel value="(MM-DD-YYYY)"  />
-                        <h:message for="dob"
-                                   styleClass="requiredErrorClass" />
+                       
                     </h:panelGrid>
 
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
-                        <h:commandButton value="#{patientController.edit? Language.valueOf.update : Language.valueOf.save}"
+                        <h:commandButton value="#{billController.edit? Language.valueOf.update : Language.valueOf.save}"
                                          id="submit" 
-                                         action="#{patientController.saveOrEdit()}" />
+                                         action="#{billController.saveOrEdit()}" />
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
-                                         action="patientMangementRedirect" />
+                                         action="billMangementRedirect" />
                     </h:panelGrid>
                         
                     <h:panelGroup >
-                        <h:dataTable id="patientList" var="patient" rows="10"
+                        <h:dataTable id="billList" var="bill" rows="10"
                                      border="1"
                                      
-                                     value="#{patientController.patientList}"
+                                     value="#{billController.billList}"
                                  >
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}"/>
+                                <h:outputLabel value="#{billController.billList.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.patientId}" />
+                                    <h:outputLabel value="#{Language.valueOf.billId}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.id}" />
+                                <h:outputLabel value="#{bill.id}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                    <h:outputLabel value="#{Language.valueOf.billNumber}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.name}" />
+                                <h:outputLabel value="#{bill.billNumber}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.address}" />
+                                    <h:outputLabel value="#{Language.valueOf.billDate}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.address}" />
+                                <h:outputLabel value="#{bill.billDate}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.phone}" />
+                                    <h:outputLabel value="#{Language.valueOf.total}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.phone}" />
+                                <h:outputLabel value="#{bill.total}" />
                             </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.preparedBy}" />
+                                </f:facet>
+                                <h:outputLabel value="#{bill.preparedBy}" />
+                            </h:column>
+                            
                            <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{Language.valueOf.edit}"/>
                                     </f:facet>
                                     <center>
                                         <h:commandLink id="editRoleGroup" value="Edit">
-                                            <f:ajax event="click" listener="#{patientController.getPatientForEdit()}" render="@form"/>
+                                            <f:ajax event="click" listener="#{billController.getBillForEdit()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>

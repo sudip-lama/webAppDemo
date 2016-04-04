@@ -25,6 +25,7 @@ public class Language implements Serializable {
     public Language() {
         languageMap.put("English", "EN");
         languageMap.put("नेपाली", "NP");
+        languageMap.put("AR", "AR");
     }
 
     public void onLanguageChange() {
