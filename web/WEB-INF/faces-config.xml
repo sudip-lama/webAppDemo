@@ -46,6 +46,21 @@
         </navigation-case>
     </navigation-rule>
     
+     <navigation-rule>
+        <navigation-case>
+            <from-outcome>DiagnosisMangement</from-outcome>
+            <to-view-id>/pages/patient/DiagnosisManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>DiagnosisMangementRedirect</from-outcome>
+            <to-view-id>/pages/patient/DiagnosisManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
     <navigation-rule>
         <navigation-case>
             <from-outcome>doctorMangement</from-outcome>
@@ -59,4 +74,20 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>searchPatientVisitByDoctor</from-outcome>
+            <to-view-id>/pages/patient/SearchPatientVisitByDoctor.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>searchPatientVisitByDoctorRedirect</from-outcome>
+            <to-view-id>/pages/patient/SearchPatientVisitByDoctor.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    
 </faces-config>

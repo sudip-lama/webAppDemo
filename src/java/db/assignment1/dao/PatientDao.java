@@ -6,6 +6,7 @@
 package db.assignment1.dao;
 
 import db.assignment1.entity.Patient;
+import db.assignment1.entity.SearchCriteria;
 import java.util.List;
 
 /**

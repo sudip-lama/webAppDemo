@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+       <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.searchPatientVisitTitle}
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="patientVisitSearchForm">
+                    <h:outputLabel value="#{searchController.message}"/>
+                   
+                   
+                    <h:panelGroup> 
+                       <h:panelGrid columns="3">
+
+                        <h:outputLabel value="#{Language.valueOf.doctorId}"  />
+                        <h:selectOneMenu id="doctorId" value="#{searchController.searchCriteria.doctorId}" 
+                                                >
+                            <f:selectItems value="#{patientVisitController.doctorSelectItemType}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:message for="doctorId"
+                                   styleClass="requiredErrorClass" />
+                         </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGrid columns="4">
+                        <h:outputLabel value="#{Language.valueOf.beginDate}"  />
+                        <h:inputText value="#{searchController.searchCriteria.beginDate}"
+                                     id="beginDate" styleClass="required"  >
+                            <f:convertDateTime pattern="MM-dd-yyyy"/>
+                        </h:inputText>
+                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        <h:message for="beginDate"
+                                   styleClass="requiredErrorClass" />
+                        <h:outputLabel value="#{Language.valueOf.endDate}"  />
+                        <h:inputText value="#{searchController.searchCriteria.endDate}"
+                                     id="endDate" styleClass="required"  >
+                            <f:convertDateTime pattern="MM-dd-yyyy"/>
+                        </h:inputText>
+                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        <h:message for="endDate"
+                                   styleClass="requiredErrorClass" />
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{Language.valueOf.search}"
+                                         id="submit" 
+                                         action="#{searchController.searchPatientVisit()}" />
+                        <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
+                                         action="searchPatientVisitByDoctorRedirect" />
+                    </h:panelGrid>
+                        
+                    
+                    <!-- Edit Patient Visit Schedule-->
+                    <h:panelGroup >
+                        <h:dataTable id="patientVisitList" var="patientVisit" rows="10"
+                                     border="1"
+                                     rendered="#{searchController.patientVisitList.size()>0}"  
+                                     value="#{searchController.patientVisitDataModel}"
+                                 >
+                            <f:facet name="header">
+                                <h:outputLabel value="#{Language.valueOf.scheduleTable}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{searchController.patientVisitDataModel.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisitController.findPatientById(patientVisit.patientId).name}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisitController.findDoctorById(patientVisit.doctorId).name}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.visitPrice}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisit.price}" />
+                            </h:column>
+
+                           
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.visitDate}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisit.vistDate}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.time}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisit.visitTime()}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

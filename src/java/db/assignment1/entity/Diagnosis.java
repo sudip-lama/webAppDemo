@@ -23,6 +23,12 @@ public class Diagnosis {
     public Diagnosis() {
     }
 
+    public Diagnosis(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
     public Diagnosis(String name, double price) {
         this.name = name;
         this.price = price;

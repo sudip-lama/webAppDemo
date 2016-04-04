@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+       <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.patientVisitTitle}
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="patientVisitManagementForm">
+                    <h:outputLabel value="#{patientVisitController.message}"/>
+                    <!-- Find patientID -->
+                   
+                    <h:panelGroup>   
+                    <h:panelGrid columns="9">
+                       <h:form id="patientSearchForm">
+                        <h:outputLabel value="#{Language.valueOf.patientId}"  />
+                        <h:inputText value="#{patientVisitController.patientVisit.patient.id}" id="pId"
+                                     styleClass="required"
+                                    />
+                        <h:message for="pId"
+                                   styleClass="requiredErrorClass" /> 
+                        <h:outputLabel />
+                        <h:outputLabel value="#{Language.valueOf.patientName}"  />
+                        <h:inputText value="#{patientVisitController.patientVisit.patient.name}" id="pName"
+                                     styleClass="required" />
+                        <h:message for="pName"
+                                   styleClass="requiredErrorClass" />    
+                       <h:outputLabel />
+                         <h:commandButton value="#{Language.valueOf.search}"
+                                          id="search" 
+                         action="#{patientVisitController.searchPatientByName()}" />
+                       </h:form>
+                        </h:panelGrid>
+                        </h:panelGroup> 
+                    <h:panelGroup> 
+                       <h:panelGrid columns="3">
+
+                        <h:outputLabel value="#{Language.valueOf.doctorId}"  />
+                        <h:selectOneMenu id="doctorId" value="#{patientVisitController.patientVisit.doctor.id}" 
+                                                >
+                            <f:selectItems value="#{patientVisitController.doctorSelectItemType}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:message for="doctorId"
+                                   styleClass="requiredErrorClass" />
+
+                        <h:outputLabel value="#{Language.valueOf.reason}"  />
+                        <h:inputTextarea value="#{patientVisitController.patientVisit.reason}"
+                                         rows="5" cols="50" id="reason" styleClass="required" 
+                                        />
+                        <h:message for="reason"
+                                   styleClass="requiredErrorClass" />
+                         </h:panelGrid>
+                        </h:panelGroup>
+                    <h:outputLabel value="#{Language.valueOf.visitPrice}"  />
+                    <h:inputText value="#{patientVisitController.patientVisit.price}" id="vPrice"
+                                     styleClass="required" />
+                        <h:message for="vPrice"
+                                   styleClass="requiredErrorClass" />  
+                    <h:panelGrid columns="4">
+                        <h:outputLabel value="#{Language.valueOf.visitDate}"  />
+                        <h:inputText value="#{patientVisitController.patientVisit.vistDate}"
+                                     id="visitDate" styleClass="required"  >
+                            <f:convertDateTime pattern="MM-dd-yyyy"/>
+                        </h:inputText>
+                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        <h:message for="visitDate"
+                                   styleClass="requiredErrorClass" />
+                    </h:panelGrid>
+                    
+                        <h:panelGrid columns="12">
+                        <h:outputLabel value="#{Language.valueOf.time}:"  />
+                        <h:inputText size="2" value="#{patientVisitController.patientVisit.hr}"
+                                          id="hr" styleClass="required" />
+                        <h:outputLabel value="#{Language.valueOf.hr}"  />
+                        <h:message for="hr"
+                                   styleClass="requiredErrorClass" />
+                        <h:outputLabel/>
+                        
+                        <h:inputText size="2" value="#{patientVisitController.patientVisit.min}"
+                                     id="min" styleClass="required" required="true" />
+                        <h:outputLabel value="#{Language.valueOf.min}"  />
+                        <h:message for="min"
+                                   styleClass="requiredErrorClass" />
+                        <h:outputLabel/>
+                        
+                        <h:selectOneMenu id="amPm" value="#{patientVisitController.patientVisit.amPm}" 
+                                                 >
+                            <f:selectItems value="#{patientVisitController.amPmSelectItem}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:outputLabel value="#{Language.valueOf.amPm}"  />
+                        <h:message for="amPm"
+                                   styleClass="requiredErrorClass" />
+                        </h:panelGrid>
+                    
+                      
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{patientVisitController.edit? Language.valueOf.update : Language.valueOf.save}"
+                                         id="submit" 
+                                         action="#{patientVisitController.saveOrEdit()}" />
+                        <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
+                                         action="patientMangementRedirect" />
+                    </h:panelGrid>
+                        
+                    <h:panelGroup >
+                        <h:dataTable id="patientList" var="patient" rows="10"
+                                     border="1"
+                                     rendered="#{patientVisitController.patients.size()>0}"  
+                                     value="#{patientVisitController.patientList}"
+                                 >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.searchedPatient}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.id}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.name}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.address}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.address}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.phone}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.phone}" />
+                            </h:column>
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.add}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.add}">
+                                            <f:ajax event="click" listener="#{patientVisitController.selectPatientForVisit()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <!-- Edit Patient Visit Schedule-->
+                    <h:panelGroup >
+                        <h:dataTable id="patientVisitList" var="patientVisit" rows="10"
+                                     border="1"
+                                     rendered="#{patientVisitController.patientVisitList.size()>0}"  
+                                     value="#{patientVisitController.patientVisitDataModel}"
+                                 >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.scheduleTable}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisitController.patientVisitDataModel.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisitController.findPatientById(patientVisit.patientId).name}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.doctorName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisitController.findDoctorById(patientVisit.doctorId).name}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.visitDate}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisit.vistDate}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.time}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientVisit.visitTime()}" />
+                            </h:column>
+
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.edit}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.edit}">
+                                            <f:ajax event="click" listener="#{patientVisitController.selectPatientVisitForEdit()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

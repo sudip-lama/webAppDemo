@@ -7,6 +7,7 @@ package db.assignment1.dao;
 
 
 import db.assignment1.entity.PatientVisit;
+import db.assignment1.entity.SearchCriteria;
 import java.util.List;
 
 /**
@@ -18,4 +19,5 @@ public interface PatientVisitDao {
     public List<PatientVisit> getAllPatientVisit();
     public PatientVisit getPatientVisitById(Integer patientVisitId);
     public int update(PatientVisit patientVisit);
+    public List<PatientVisit> getPatientVisitBySearchCriteria(SearchCriteria searchCriteria);
 }

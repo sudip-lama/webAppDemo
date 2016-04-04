@@ -5,7 +5,9 @@
  */
 package db.assignment1.service;
 
+import db.assignment1.entity.Patient;
 import db.assignment1.entity.PatientVisit;
+import db.assignment1.entity.SearchCriteria;
 import java.util.List;
 
 /**
@@ -17,4 +19,5 @@ public interface PatientVisitService {
     public List<PatientVisit> getAllPatientVisit();
     public PatientVisit getPatientVisitById(Integer patientVisitId);
     public boolean updatePatientVisitRecord(PatientVisit patientVisit);
+    public List<PatientVisit> searchPatientVisitBySearchCriteria(SearchCriteria searchCriteria);
 }
