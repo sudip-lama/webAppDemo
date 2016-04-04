@@ -28,19 +28,14 @@
                         <h:message for="diseaseType"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.diseasesymptoms}"  />
+                        <h:outputLabel value="#{Language.valueOf.diseasymptoms}"  />
                         <h:inputText value="#{diseaseController.disease.diseasesymptoms}"
                                      id="diseasesymptoms" styleClass="required" />
                         <h:message for="diseasesymptoms"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.diseaseId}"  />
-                        <h:inputText value="#{diseaseController.disease.id}"
-                                     id="id" styleClass="required" >
-                            
-                        </h:inputText>
-                        <h:message for="id"
-                                   styleClass="requiredErrorClass" />
+                        
+                       
                     </h:panelGrid>
 
                     <h:panelGrid columns="3" >
@@ -86,7 +81,7 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.diseasesymptoms}" />
+                                    <h:outputLabel value="#{Language.valueOf.diseasymptoms}" />
                                 </f:facet>
                                 <h:outputLabel value="#{disease.diseasesymptoms}" />
                             </h:column>

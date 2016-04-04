@@ -25,6 +25,7 @@ public class BillServiceImp implements BillService{
 
     @Autowired
     private BillDao billDaoImp;
+    
     @Override
     @Transactional(readOnly = false)
     public boolean createBillRecord(Bill bill) {
