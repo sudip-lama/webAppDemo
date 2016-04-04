@@ -23,9 +23,9 @@ public class Language implements Serializable {
     private final Locale defaultLocale = new Locale("en", "US");
 
     public Language() {
-        languageMap.put("English", "EN");
-        languageMap.put("नेपाली", "NP");
-        languageMap.put("AR", "AR");
+        languageMap.put("English", "en");
+        languageMap.put("नेपाली", "ne");
+        languageMap.put("AR", "ar");
     }
 
     public void onLanguageChange() {
@@ -35,11 +35,16 @@ public class Language implements Serializable {
     public List<SelectItem> getLanguageList() {
         if (languageList == null) {
             languageList = new ArrayList<>();
+            languageList.add(new SelectItem("ar", "Arabic"));
+            languageList.add(new SelectItem("en", "English"));
+            languageList.add(new SelectItem("ne", "Nepali"));
+             
+            /*
             SelectItem tempSelectItem;
             for (Object tempObject : languageMap.keySet()) {
                 tempSelectItem = new SelectItem(languageMap.get(tempObject).toString(), tempObject.toString());
                 languageList.add(tempSelectItem);
-            }
+            }*/
         }
         return languageList;
     }
@@ -58,7 +63,8 @@ public class Language implements Serializable {
 
     public ResourceBundle getValueOf() throws Exception {
         if (valueOf == null) {
-            valueOf = ResourceBundle.getBundle(selectedLanguage, defaultLocale);
+            //valueOf = ResourceBundle.getBundle(selectedLanguage, defaultLocale);
+            valueOf = ResourceBundle.getBundle("message", new Locale(selectedLanguage));
         }
         return valueOf;
     }

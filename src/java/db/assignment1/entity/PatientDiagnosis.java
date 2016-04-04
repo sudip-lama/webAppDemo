@@ -35,7 +35,15 @@ public class PatientDiagnosis {
     public PatientDiagnosis() {
     }
 
-    public PatientDiagnosis(Date diagnosisDate, int doctorId, int patientId, int diagnosisId) {
+    public PatientDiagnosis(int id, Date diagnosisDate,  int patientId, int doctorId, int diagnosisId) {
+        this.id = id;
+        this.diagnosisDate = diagnosisDate;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.diagnosisId = diagnosisId;
+    }
+    
+    public PatientDiagnosis(Date diagnosisDate,  int patientId, int doctorId, int diagnosisId) {
         this.diagnosisDate = diagnosisDate;
         this.doctorId = doctorId;
         this.patientId = patientId;

@@ -19,14 +19,8 @@
             <h:form id="mainHeaderForm"> 
 
                     <div id="language-menu">
-                        <h:panelGrid columns="1" styleClass="headerToolBar-menu">
-
-                           
-
+                        <h:panelGrid columns="1" >
                             <h:panelGrid columns="7">
-                               
-                               
-
                                 <h:selectOneRadio value="#{Language.selectedLanguage}">
                                     <f:ajax event="click" listener="#{Language.onLanguageChange()}"
                                             render="@all"/>
