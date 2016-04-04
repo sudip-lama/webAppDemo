@@ -10,87 +10,80 @@
     <h:body>
         <ui:composition template="./../../resources/allMenuTemplate.xhtml">
             <ui:define name="title">
-                #{Language.valueOf.patientTitle}
+                #{Language.valueOf.roomTitle}
             </ui:define>
             <ui:define name="content">
-                <h:form id="patientManagementForm">
-                    <h:outputLabel value="#{patientController.message}"/>
+                <h:form id="roomManagementForm">
+                    <h:outputLabel value="#{roomController.message}"/>
                     <h:panelGrid columns="3">
-                        <h:outputLabel value="#{Language.valueOf.patientName}"  />
-                        <h:inputText value="#{patientController.patient.name}" id="name"
-                                     styleClass="required"  />
-                        <h:message for="name"
+                        <h:outputLabel value="#{Language.valueOf.roomNumber}"  />
+                        <h:inputText value="#{roomController.room.roomNumber}" id="roomNumber"
+                                     styleClass="required" />
+                        <h:message for="roomNumber"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.address}"  />
-                        <h:inputText value="#{patientController.patient.address}"
-                                     id="address" styleClass="required" />
-                        <h:message for="address"
+                        <h:outputLabel value="#{Language.valueOf.roomType}"  />
+                        <h:inputText value="#{roomController.room.roomType}"
+                                     id="roomType" styleClass="required" />
+                        <h:message for="roomType"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.phone}"  />
-                        <h:inputText value="#{patientController.patient.phone}"
-                                     id="phone" styleClass="required" />
-                        <h:message for="phone"
+                        <h:outputLabel value="#{Language.valueOf.rPrice}"  />
+                        <h:inputText value="#{roomController.room.price}"
+                                     id="price" styleClass="required" />
+                        <h:message for="price"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.dob}(MM-DD-YYYY)"  />
-                        <h:inputText value="#{patientController.patient.dob}"
-                                     id="dob" styleClass="required" >
-                            <f:convertDateTime pattern="MM-dd-yyyy"/>
-                        </h:inputText>
-                        <h:outputLabel value="(MM-DD-YYYY)"  />
-                        <h:message for="dob"
-                                   styleClass="requiredErrorClass" />
+                       
                     </h:panelGrid>
 
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
-                        <h:commandButton value="#{patientController.edit? Language.valueOf.update : Language.valueOf.save}"
+                        <h:commandButton value="#{roomController.edit? Language.valueOf.update : Language.valueOf.save}"
                                          id="submit" 
-                                         action="#{patientController.saveOrEdit()}" />
+                                         action="#{roomController.saveOrEdit()}" />
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
-                                         action="patientMangementRedirect" />
+                                         action="roomMangementRedirect" />
                     </h:panelGrid>
                         
                     <h:panelGroup >
-                        <h:dataTable id="patientList" var="patient" rows="10"
+                        <h:dataTable id="roomList" var="room" rows="10"
                                      border="1"
                                      
-                                     value="#{patientController.patientList}"
+                                     value="#{roomController.roomList}"
                                  >
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}"/>
+                                <h:outputLabel value="#{roomController.roomList.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.patientId}" />
+                                    <h:outputLabel value="#{Language.valueOf.roomId}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.id}" />
+                                <h:outputLabel value="#{room.id}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                    <h:outputLabel value="#{Language.valueOf.roomNumber}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.name}" />
+                                <h:outputLabel value="#{room.roomNumber}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.address}" />
+                                    <h:outputLabel value="#{Language.valueOf.roomType}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.address}" />
+                                <h:outputLabel value="#{room.roomType}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.phone}" />
+                                    <h:outputLabel value="#{Language.valueOf.rPrice}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patient.phone}" />
+                                <h:outputLabel value="#{room.price}" />
                             </h:column>
                            <h:column>
                                     <f:facet name="header">
@@ -98,7 +91,7 @@
                                     </f:facet>
                                     <center>
                                         <h:commandLink id="editRoleGroup" value="Edit">
-                                            <f:ajax event="click" listener="#{patientController.getPatientForEdit()}" render="@form"/>
+                                            <f:ajax event="click" listener="#{roomController.getRoomForEdit()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>

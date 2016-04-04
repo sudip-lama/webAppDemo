@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.diseaseTitle}
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="diseaseManagementForm">
+                    <h:outputLabel value="#{diseaseController.message}"/>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="#{Language.valueOf.diseaseName}"  />
+                        <h:inputText value="#{diseaseController.disease.diseaseName}" id="diseaseName"
+                                     styleClass="required" />
+                        <h:message for="diseaseName"
+                                   styleClass="requiredErrorClass" />
+
+                        <h:outputLabel value="#{Language.valueOf.diseaseType}"  />
+                        <h:inputText value="#{diseaseController.disease.diseaseType}"
+                                     id="diseaseType" styleClass="required" />
+                        <h:message for="diseaseType"
+                                   styleClass="requiredErrorClass" />
+
+                        <h:outputLabel value="#{Language.valueOf.diseasesymptoms}"  />
+                        <h:inputText value="#{diseaseController.disease.diseasesymptoms}"
+                                     id="diseasesymptoms" styleClass="required" />
+                        <h:message for="diseasesymptoms"
+                                   styleClass="requiredErrorClass" />
+
+                        <h:outputLabel value="#{Language.valueOf.diseaseId}"  />
+                        <h:inputText value="#{diseaseController.disease.id}"
+                                     id="id" styleClass="required" >
+                            
+                        </h:inputText>
+                        <h:message for="id"
+                                   styleClass="requiredErrorClass" />
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{diseaseController.edit? Language.valueOf.update : Language.valueOf.save}"
+                                         id="submit" 
+                                         action="#{diseaseController.saveOrEdit()}" />
+                        <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
+                                         action="diseaseMangementRedirect" />
+                    </h:panelGrid>
+                        
+                    <h:panelGroup >
+                        <h:dataTable id="diseaseList" var="disease" rows="10"
+                                     border="1"
+                                     
+                                     value="#{diseaseController.diseaseList}"
+                                 >
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.serialNo}" />
+                                </f:facet>
+                                <h:outputLabel value="#{diseaseController.diseaseList.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diseaseId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{disease.id}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diseaseName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{disease.diseaseName}" />
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diseaseType}" />
+                                </f:facet>
+                                 <h:outputLabel value="#{disease.diseaseType}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diseasesymptoms}" />
+                                </f:facet>
+                                <h:outputLabel value="#{disease.diseasesymptoms}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diseaseId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{disease.id}" />
+                            </h:column>
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.edit}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="Edit">
+                                            <f:ajax event="click" listener="#{diseaseController.getDiseaseForEdit()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
