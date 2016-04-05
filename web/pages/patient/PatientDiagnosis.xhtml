@@ -8,32 +8,32 @@
     <h:body>
        <ui:composition template="./../../resources/allMenuTemplate.xhtml">
             <ui:define name="title">
-                #{Language.valueOf.patientVisitTitle}
+                #{Language.valueOf.patientDiagnosisTitle}
             </ui:define>
             <ui:define name="content">
-                <h:form id="patientVisitManagementForm">
-                    <h:outputLabel value="#{patientVisitController.message}"/>
+                <h:form id="patientDiagnosisManagementForm">
+                    <h:outputLabel value="#{patientDiagnosisController.message}"/>
                     <!-- Find patientID -->
                    
                     <h:panelGroup>   
                     <h:panelGrid columns="9">
                        <h:form id="patientSearchForm">
                         <h:outputLabel value="#{Language.valueOf.patientId}"  />
-                        <h:inputText value="#{patientVisitController.patientVisit.patient.id}" id="pId"
+                        <h:inputText value="#{patientDiagnosisController.patientDiagnosis.patient.id}" id="pId"
                                      styleClass="required"
                                     />
                         <h:message for="pId"
                                    styleClass="requiredErrorClass" /> 
                         <h:outputLabel />
                         <h:outputLabel value="#{Language.valueOf.patientName}"  />
-                        <h:inputText value="#{patientVisitController.patientVisit.patient.name}" id="pName"
+                        <h:inputText value="#{patientDiagnosisController.patientDiagnosis.patient.name}" id="pName"
                                      styleClass="required" />
                         <h:message for="pName"
                                    styleClass="requiredErrorClass" />    
                        <h:outputLabel />
                          <h:commandButton value="#{Language.valueOf.search}"
                                           id="search" 
-                         action="#{patientVisitController.searchPatientByName()}" />
+                         action="#{patientDiagnosisController.searchPatientByName()}" />
                        </h:form>
                         </h:panelGrid>
                         </h:panelGroup> 
@@ -41,79 +41,49 @@
                        <h:panelGrid columns="3">
 
                         <h:outputLabel value="#{Language.valueOf.doctorId}"  />
-                        <h:selectOneMenu id="doctorId" value="#{patientVisitController.patientVisit.doctor.id}" 
+                        <h:selectOneMenu id="doctorId" value="#{patientDiagnosisController.patientDiagnosis.doctor.id}" 
                                                 >
-                            <f:selectItems value="#{patientVisitController.doctorSelectItemType}" />
+                            <f:selectItems value="#{patientDiagnosisController.doctorSelectItemType}" />
                                    
                          </h:selectOneMenu>
                         <h:message for="doctorId"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.reason}"  />
-                        <h:inputTextarea value="#{patientVisitController.patientVisit.reason}"
-                                         rows="5" cols="50" id="reason" styleClass="required" 
-                                        />
-                        <h:message for="reason"
+                       <h:outputLabel value="#{Language.valueOf.diagnosisId}"  />
+                       <h:selectOneMenu id="diagnosisId" value="#{patientDiagnosisController.patientDiagnosis.diagnosis.id}" 
+                                                >
+                           <f:selectItems value="#{patientDiagnosisController.diagnosisSelectItemType}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:message for="diagnosisId"
                                    styleClass="requiredErrorClass" />
                          </h:panelGrid>
                         </h:panelGroup>
-                    <h:outputLabel value="#{Language.valueOf.visitPrice}"  />
-                    <h:inputText value="#{patientVisitController.patientVisit.price}" id="vPrice"
-                                     styleClass="required" />
-                        <h:message for="vPrice"
-                                   styleClass="requiredErrorClass" />  
+                   
                     <h:panelGrid columns="4">
-                        <h:outputLabel value="#{Language.valueOf.visitDate}"  />
-                        <h:inputText value="#{patientVisitController.patientVisit.vistDate}"
-                                     id="visitDate" styleClass="required"  >
+                        <h:outputLabel value="#{Language.valueOf.pdiagnosisDate}"  />
+                        <h:inputText value="#{patientDiagnosisController.patientDiagnosis.diagnosisDate}"
+                                     id="pdiagnosisDate" styleClass="required"  >
                             <f:convertDateTime pattern="MM-dd-yyyy"/>
                         </h:inputText>
                         <h:outputLabel value="(MM-DD-YYYY)"  />
-                        <h:message for="visitDate"
+                        <h:message for="pdiagnosisDate"
                                    styleClass="requiredErrorClass" />
                     </h:panelGrid>
-                    
-                        <h:panelGrid columns="12">
-                        <h:outputLabel value="#{Language.valueOf.time}:"  />
-                        <h:inputText size="2" value="#{patientVisitController.patientVisit.hr}"
-                                          id="hr" styleClass="required" />
-                        <h:outputLabel value="#{Language.valueOf.hr}"  />
-                        <h:message for="hr"
-                                   styleClass="requiredErrorClass" />
-                        <h:outputLabel/>
-                        
-                        <h:inputText size="2" value="#{patientVisitController.patientVisit.min}"
-                                     id="min" styleClass="required" required="true" />
-                        <h:outputLabel value="#{Language.valueOf.min}"  />
-                        <h:message for="min"
-                                   styleClass="requiredErrorClass" />
-                        <h:outputLabel/>
-                        
-                        <h:selectOneMenu id="amPm" value="#{patientVisitController.patientVisit.amPm}" 
-                                                 >
-                            <f:selectItems value="#{patientVisitController.amPmSelectItem}" />
-                                   
-                         </h:selectOneMenu>
-                        <h:outputLabel value="#{Language.valueOf.amPm}"  />
-                        <h:message for="amPm"
-                                   styleClass="requiredErrorClass" />
-                        </h:panelGrid>
-                    
-                      
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
-                        <h:commandButton value="#{patientVisitController.edit? Language.valueOf.update : Language.valueOf.save}"
+                        <h:commandButton value="#{patientDiagnosisController.edit? Language.valueOf.update : Language.valueOf.save}"
                                          id="submit" 
-                                         action="#{patientVisitController.saveOrEdit()}" />
+                                         action="#{patientDiagnosisController.saveOrEdit()}" />
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
-                                         action="patientMangementRedirect" />
+                                         action="PatientDiagnosisMangementRedirect" />
                     </h:panelGrid>
                         
                     <h:panelGroup >
                         <h:dataTable id="patientList" var="patient" rows="10"
                                      border="1"
-                                     rendered="#{patientVisitController.patients.size()>0}"  
-                                     value="#{patientVisitController.patientList}"
+                                     rendered="#{patientDiagnosisController.patientList.size()>0}"  
+                                     value="#{patientDiagnosisController.patientDataModel}"
                                  >
                             <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.searchedPatient}" />
@@ -122,7 +92,7 @@
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientController.patientList.rowIndex+1}"/>
+                                <h:outputLabel value="#{patientDiagnosisController.patientDataModel.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
@@ -157,54 +127,53 @@
                                     </f:facet>
                                     <center>
                                         <h:commandLink id="editRoleGroup" value="#{Language.valueOf.add}">
-                                            <f:ajax event="click" listener="#{patientVisitController.selectPatientForVisit()}" render="@form"/>
+                                            <f:ajax event="click" listener="#{patientDiagnosisController.selectPatientForDiagnosis()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>
                                 </h:column>
                         </h:dataTable>
                     </h:panelGroup>
-                    <!-- Edit Patient Visit Schedule-->
+                    <!-- Edit Patient Diagnosis Schedule-->
                     <h:panelGroup >
-                        <h:dataTable id="patientVisitList" var="patientVisit" rows="10"
+                        <h:dataTable id="patientDiagnosisList" var="patientDiagnosis" rows="10"
                                      border="1"
-                                     rendered="#{patientVisitController.patientVisitList.size()>0}"  
-                                     value="#{patientVisitController.patientVisitDataModel}"
+                                     rendered="#{patientDiagnosisController.patientDiagnosisList.size()>0}"  
+                                     value="#{patientDiagnosisController.patientDiagnosisDataModel}"
                                  >
                             <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.scheduleTable}" />
+                                    <h:outputLabel value="#{Language.valueOf.allPatientDiagnosis}" />
                              </f:facet>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientVisitController.patientVisitDataModel.rowIndex+1}"/>
+                                <h:outputLabel value="#{patientDiagnosisController.patientDiagnosisDataModel.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.patientName}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientVisitController.findPatientById(patientVisit.patientId).name}" />
+                                <h:outputLabel value="#{patientDiagnosisController.findPatientById(patientDiagnosis.patientId).name}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.doctorName}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientVisitController.findDoctorById(patientVisit.doctorId).name}" />
+                                <h:outputLabel value="#{patientDiagnosisController.findDoctorById(patientDiagnosis.doctorId).name}" />
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.diagnosisName}" />
+                                </f:facet>
+                                 <h:outputLabel value="#{patientDiagnosisController.findDiagnosisById(patientDiagnosis.diagnosisId).name}" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.visitDate}" />
+                                    <h:outputLabel value="#{Language.valueOf.pdiagnosisDate}" />
                                 </f:facet>
-                                <h:outputLabel value="#{patientVisit.vistDate}" />
-                            </h:column>
-
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.time}" />
-                                </f:facet>
-                                <h:outputLabel value="#{patientVisit.visitTime()}" />
+                                <h:outputLabel value="#{patientDiagnosis.diagnosisDate}" />
                             </h:column>
 
                            <h:column>
@@ -213,7 +182,7 @@
                                     </f:facet>
                                     <center>
                                         <h:commandLink id="editRoleGroup" value="#{Language.valueOf.edit}">
-                                            <f:ajax event="click" listener="#{patientVisitController.selectPatientVisitForEdit()}" render="@form"/>
+                                            <f:ajax event="click" listener="#{patientDiagnosisController.selectPatientDiagnosisForEdit()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>

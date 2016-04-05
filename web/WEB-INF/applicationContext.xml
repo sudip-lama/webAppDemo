@@ -29,7 +29,7 @@
          <property name="username" value="root">
                 
          </property>
-         <property name="password" value="maha22">
+         <property name="password" value="">
                 
          </property>
     </bean>

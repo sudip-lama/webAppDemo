@@ -19,31 +19,37 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(readOnly = true)
-public class PatientDiagnosisServiceImp implements PatientDiagnosisService{
+public class PatientDiagnosisServiceImp implements PatientDiagnosisService {
 
     @Autowired
     private PatientDiagnosisDao patientDiagnosisDao;
-    
+
     @Override
     @Transactional(readOnly = false)
     public boolean createPatientDiagnosisRecord(PatientDiagnosis patientDiagnosis) {
-        return patientDiagnosisDao.createPatientDiagnosisRecord(patientDiagnosis)>0?true:false;
+        patientDiagnosis.setPatientId(patientDiagnosis.getPatient().getId());
+        patientDiagnosis.setDoctorId(patientDiagnosis.getDoctor().getId());
+        patientDiagnosis.setDiagnosisId(patientDiagnosis.getDiagnosis().getId());
+        return patientDiagnosisDao.createPatientDiagnosisRecord(patientDiagnosis) > 0 ? true : false;
     }
 
     @Override
     public List<PatientDiagnosis> getAllPatientDiagnosis() {
-    return patientDiagnosisDao.getAllPatientDiagnosis();
+        return patientDiagnosisDao.getAllPatientDiagnosis();
     }
 
     @Override
     public PatientDiagnosis getPatientDiagnosisById(Integer patientDiagnosisId) {
-    return patientDiagnosisDao.getPatientDiagnosisById(patientDiagnosisId);
+        return patientDiagnosisDao.getPatientDiagnosisById(patientDiagnosisId);
     }
 
     @Override
     @Transactional(readOnly = false)
     public boolean update(PatientDiagnosis patientDiagnosis) {
-    return patientDiagnosisDao.update(patientDiagnosis)>0?true:false;
+        patientDiagnosis.setPatientId(patientDiagnosis.getPatient().getId());
+        patientDiagnosis.setDoctorId(patientDiagnosis.getDoctor().getId());
+        patientDiagnosis.setDiagnosisId(patientDiagnosis.getDiagnosis().getId());
+        return patientDiagnosisDao.update(patientDiagnosis) > 0 ? true : false;
     }
-    
+
 }

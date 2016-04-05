@@ -19,7 +19,7 @@ public class PatientDiagnosis {
       
     private Patient patient;
     
-    private Diagnosis Diagnosis;
+    private Diagnosis diagnosis;
     
     private Doctor doctor;
     
@@ -67,6 +67,10 @@ public class PatientDiagnosis {
     }
 
     public Patient getPatient() {
+        if(patient==null)
+        {
+            patient=new Patient();
+        }
         return patient;
     }
 
@@ -75,14 +79,22 @@ public class PatientDiagnosis {
     }
 
     public Diagnosis getDiagnosis() {
-        return Diagnosis;
+        if(diagnosis==null)
+        {
+            diagnosis=new Diagnosis();
+        }
+        return diagnosis;
     }
 
     public void setDiagnosis(Diagnosis Diagnosis) {
-        this.Diagnosis = Diagnosis;
+        this.diagnosis = Diagnosis;
     }
 
     public Doctor getDoctor() {
+        if(doctor==null)
+        {
+            doctor=new Doctor();
+        }
         return doctor;
     }
 
