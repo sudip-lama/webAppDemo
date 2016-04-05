@@ -3,23 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db.assignment1.dao;
+package db.assignment1.service;
 
 import db.assignment1.entity.Admit;
-import db.assignment1.entity.Patient;
 import java.util.List;
 
 /**
  *
- * @author maha
+ * @author SUDIP
  */
-
-    public interface AdmitDao {
-    public int createAdmitRecord(Admit admit);
+public interface AdmitService {
+  public boolean createAdmitRecord(Admit admit);
     public List<Admit> getAllCurrentPatientInHospital();
     public Admit getAdmitById(Integer admitId);
-    public int updateAdmitRecord(Admit admit);
+    public boolean updateAdmitRecord(Admit admit);  
 }
-
-    
-

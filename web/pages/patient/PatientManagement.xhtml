@@ -39,8 +39,16 @@
                                      id="dob" styleClass="required" >
                             <f:convertDateTime pattern="MM-dd-yyyy"/>
                         </h:inputText>
-                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        
                         <h:message for="dob"
+                                   styleClass="requiredErrorClass" />
+                        <h:outputLabel value="#{Language.valueOf.insurance}"  />
+                        <h:selectOneMenu id="insurance" value="#{patientController.patient.insurance}" 
+                                                >
+                            <f:selectItems value="#{patientController.insuranceSelectItemType}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:message for="insurance"
                                    styleClass="requiredErrorClass" />
                     </h:panelGrid>
 
@@ -91,6 +99,12 @@
                                     <h:outputLabel value="#{Language.valueOf.phone}" />
                                 </f:facet>
                                 <h:outputLabel value="#{patient.phone}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.insurance}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.insurance}" />
                             </h:column>
                            <h:column>
                                     <f:facet name="header">

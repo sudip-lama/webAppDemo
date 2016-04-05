@@ -7,12 +7,12 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-            <title><ui:insert name="title">#{Language.valueOf.applicationName}</ui:insert></title>
+        <title><ui:insert name="title">#{Language.valueOf.applicationName}</ui:insert></title>
 
 
 
@@ -21,89 +21,166 @@
     <h:body>
         <div class="container"> 
             <div class="jumbotron"> 
-        <div id="top">
-            <h:form id="mainHeaderForm"> 
+                <h1 class="text-center">#{Language.valueOf.applicationName} </h1>
+                <div id="top">
+                    <h:form id="mainHeaderForm"> 
 
-                <div id="language-menu">
-                    <h:panelGrid columns="1" >
-                        <h:panelGrid columns="7">
-                            <h:selectOneRadio value="#{Language.selectedLanguage}">
-                                <f:ajax event="click" listener="#{Language.onLanguageChange()}"
-                                        render="@all"/>
-                                <f:selectItems value="#{Language.languageList}"/>
-                            </h:selectOneRadio>
-                        </h:panelGrid>
-                    </h:panelGrid>
+                        <div id="language-menu">
+                            <h:panelGrid columns="1" >
+                                <h:panelGrid columns="9">
+                                    <label class="radio-inline">
+                                        <h:selectOneRadio value="#{Language.selectedLanguage}">
+                                            <f:ajax event="click" listener="#{Language.onLanguageChange()}"
+                                                    render="@all"/>
+                                            <f:selectItems value="#{Language.languageList}"/>
+                                        </h:selectOneRadio>
+                                    </label>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </div>
+                        <nav class="navbar navbar-inverse">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <ul class="chapters"/>
+                                </div>
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><h:commandLink value="#{Language.valueOf.home}"
+                                                                      action="home"
+                                                                      immediate="true"
+                                                                      /> </li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">#{Language.valueOf.insertData}
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><h:commandLink value="#{Language.valueOf.patientTitle}"
+                                                               action="patientMangementRedirect"
+                                                               immediate="true"
+                                                               /></li>
+                                            <li> <h:commandLink value="#{Language.valueOf.doctorTitle}"
+                                                                action="doctorMangementRedirect"
+                                                                immediate="true"
+                                                                /></li>
+                                            <li> <h:commandLink value="#{Language.valueOf.diseaseTitle}"
+                                                                action="diseaseMangementRedirect"
+                                                                immediate="true"
+                                                                /> </li> 
+                                            <li><h:commandLink value="#{Language.valueOf.diagnosisTitle} "
+                                                               action="DiagnosisMangementRedirect"
+                                                               immediate="true"
+                                                               />   </li> 
+                                            <li><h:commandLink value="#{Language.valueOf.roomTitle}"
+                                                               action="roomMangementRedirect"
+                                                               immediate="true"
+                                                               />   </li> 
+                                        </ul>
+
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">#{Language.valueOf.procedure}
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+
+                                            <li> <h:commandLink value="#{Language.valueOf.patientVisitTitle}"
+                                                                action="patientVisitMangementRedirect"
+                                                                immediate="true"/></li>
+                                            <li><h:commandLink value="#{Language.valueOf.patientDiagnosisTitle} "
+                                                               action="PatientDiagnosisMangementRedirect"
+                                                               immediate="true"
+                                                               />  </li>
+                                            <li><h:commandLink value="#{Language.valueOf.billTitle}"
+                                                               action="billMangementRedirect"
+                                                               immediate="true"
+                                                              /></li>  
+                                            <li><h:commandLink value="#{Language.valueOf.patientAdmitTitle}"
+                                                               action="PatientAdmitMangementRedirect"
+                                                               immediate="true"
+                                                              /></li>  
+                                        </ul>
+
+                                    </li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">#{Language.valueOf.search}
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><h:commandLink value="#{Language.valueOf.searchPatientVisitTitle} "
+                                                               action="searchPatientVisitByDoctorRedirect"
+                                                               immediate="true"
+                                                               /></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                                
+
+
+                            </div>
+                        </nav>
+                        <!--
+                        <h:commandLink value="PatientManagement"
+                                       action="patientMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>       
+        
+                        <h:commandLink value="DoctorManagement"
+                                       action="doctorMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>   
+        
+        
+                        <h:commandLink value="RoomManagement"
+                                       action="roomMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>
+                         
+        
+                        <h:commandLink value="BillManagement"
+                                       action="billMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>
+        
+                        <h:commandLink value="PatientVisitMangement"
+                                       action="patientVisitMangementRedirect"
+                                       immediate="true"
+        
+                                       style="padding-left: 10px;"/>  
+                        <h:commandLink value="DiagnosisMangement "
+                                       action="DiagnosisMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>  
+                        <h:commandLink value="PatientDiagnosisMangement "
+                                       action="PatientDiagnosisMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>  
+                        <h:commandLink value="searchPatientVisitByDoctor "
+                                       action="searchPatientVisitByDoctorRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>  
+        
+                        -->
+                    </h:form>
                 </div>
 
-                <h:commandLink value="PatientManagement"
-                               action="patientMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>       
+                <div id="metadata" class="center_content">
+                    <ui:insert name="metadata"></ui:insert>
+                </div>
 
-                <h:commandLink value="DoctorManagement"
-                               action="doctorMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>   
+                <div id="javascript" class="center_content">
+                    <ui:insert name="javascript"></ui:insert>
+                </div>
 
+                <div id="stylesheet" class="center_content">
+                    <ui:insert name="stylesheet"></ui:insert>
+                </div>
 
-                <h:commandLink value="RoomManagement"
-                               action="roomMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>
-                <h:commandLink value="DiseaseManagement"
-                               action="diseaseMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>   
+                <div id="content" class="center_content" style="min-height: 480px">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
 
-                <h:commandLink value="BillManagement"
-                               action="billMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>
-
-                <h:commandLink value="PatientVisitMangement"
-                               action="patientVisitMangementRedirect"
-                               immediate="true"
-
-                               style="padding-left: 10px;"/>  
-                <h:commandLink value="DiagnosisMangement "
-                               action="DiagnosisMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>  
-                <h:commandLink value="PatientDiagnosisMangement "
-                               action="PatientDiagnosisMangementRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>  
-                <h:commandLink value="searchPatientVisitByDoctor "
-                               action="searchPatientVisitByDoctorRedirect"
-                               immediate="true"
-                               style="padding-left: 10px;"/>  
-
-
-            </h:form>
+                <div id="bottom" align="right">
+                    <h:outputText styleClass="footer-text" value="#{Language.valueOf.footer}" />
+                </div>
+            </div>
         </div>
-
-        <div id="metadata" class="center_content">
-            <ui:insert name="metadata"></ui:insert>
-        </div>
-
-        <div id="javascript" class="center_content">
-            <ui:insert name="javascript"></ui:insert>
-        </div>
-
-        <div id="stylesheet" class="center_content">
-            <ui:insert name="stylesheet"></ui:insert>
-        </div>
-
-        <div id="content" class="center_content" style="min-height: 480px">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
-
-        <div id="bottom" align="right">
-            <h:outputText styleClass="footer-text" value="#{Language.valueOf.footer}" />
-        </div>
-</div>
-</div>
     </h:body>
 
 </html>

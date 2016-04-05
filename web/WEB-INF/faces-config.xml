@@ -14,8 +14,8 @@
     <!-- Navigation Rules -->
     <navigation-rule>
         <navigation-case>
-            <from-outcome>studentInfo</from-outcome>
-            <to-view-id>/pages/student.xhtml</to-view-id>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -69,6 +69,20 @@
         <navigation-case>
             <from-outcome>PatientDiagnosisMangementRedirect</from-outcome>
             <to-view-id>/pages/patient/PatientDiagnosis.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>PatientAdmitMangement</from-outcome>
+            <to-view-id>/pages/patient/PatientAdmit.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>PatientAdmitMangementRedirect</from-outcome>
+            <to-view-id>/pages/patient/PatientAdmit.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

@@ -5,14 +5,17 @@
  */
 package db.assignment1.controller;
 
+import db.assignment1.entity.Doctor;
 import db.assignment1.entity.Patient;
 import db.assignment1.service.PatientService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +37,7 @@ public class PatientController {
     private String message;
     private boolean edit=false;
     private DataModel<Patient> patientList;
-    
+    private List<SelectItem> insuranceSelectItemType;
     /**
      * Creates a new instance of PatientController
      */
@@ -157,6 +160,24 @@ public class PatientController {
 
     public void setEdit(boolean edit) {
         this.edit = edit;
+    }
+
+    public List<SelectItem> getInsuranceSelectItemType() {
+        if(insuranceSelectItemType==null)
+        {
+            insuranceSelectItemType= new ArrayList<>();
+            insuranceSelectItemType.add(new SelectItem("American life Insurance","American life Insurance")); 
+            insuranceSelectItemType.add(new SelectItem("American Family Insurance","American Family Insurance")); 
+           
+            insuranceSelectItemType.add(new SelectItem("Blue Cross","Blue Cross"));
+            insuranceSelectItemType.add(new SelectItem("Liberty","Liberty"));
+            
+        }
+        return insuranceSelectItemType;
+    }
+
+    public void setInsuranceSelectItemType(List<SelectItem> insuranceSelectItemType) {
+        this.insuranceSelectItemType = insuranceSelectItemType;
     }
     
 }

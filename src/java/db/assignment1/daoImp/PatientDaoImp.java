@@ -29,11 +29,11 @@ public class PatientDaoImp implements PatientDao{
     @Override
     public int createPatientRecord(Patient patient) {
         String sql = "INSERT INTO PATIENT_DETAIL ( PATIENT_NAME ,"
-                + " DATE_OF_BIRTH , PATIENT_ADDRESS , PATIENT_PHONE , DELETE_STATUS ) "
-                + "VALUES ( ? , ? , ? , ? , 0) ";
+                + " DATE_OF_BIRTH , PATIENT_ADDRESS , PATIENT_PHONE ,PATIENT_INSURANCE , DELETE_STATUS ) "
+                + "VALUES ( ? , ? , ? , ? , ? , 0) ";
         Object [] params=new Object[]{patient.getName(),patient.getDob(),
-            patient.getAddress(),patient.getPhone()};
-        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR};
+            patient.getAddress(),patient.getPhone(),patient.getInsurance()};
+        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR};
           return jdbcTemplate.update(sql, params, types);
     }
 
@@ -50,7 +50,8 @@ public class PatientDaoImp implements PatientDao{
                Patient patient=new Patient( rs.getInt("PATIENT_ID"),
                        rs.getString("PATIENT_NAME"),
                        rs.getDate("DATE_OF_BIRTH"),
-                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
+                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE")
+                       ,rs.getString("PATIENT_INSURANCE"));
                return patient;
            }
        });
@@ -70,7 +71,8 @@ public class PatientDaoImp implements PatientDao{
                Patient patient=new Patient( rs.getInt("PATIENT_ID"),
                        rs.getString("PATIENT_NAME"),
                        rs.getDate("DATE_OF_BIRTH"),
-                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE"));
+                       rs.getString("PATIENT_ADDRESS"),rs.getString("PATIENT_PHONE")
+               ,rs.getString("PATIENT_INSURANCE"));
                return patient;
            }
                         });
@@ -98,11 +100,13 @@ public class PatientDaoImp implements PatientDao{
                 + " SET PATIENT_NAME = ? ,"
                 + " DATE_OF_BIRTH = ? , "
                 + " PATIENT_ADDRESS = ? ,"
-                + " PATIENT_PHONE = ? "
+                + " PATIENT_PHONE = ? ,"
+                + " PATIENT_INSURANCE = ? "
                 + " WHERE PATIENT_ID = ? ";
         Object [] params=new Object[]{patient.getName(),patient.getDob(),
-            patient.getAddress(),patient.getPhone(),patient.getId()};
-        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR,Types.INTEGER};
+            patient.getAddress(),patient.getPhone(),patient.getInsurance(),patient.getId()};
+        int [] types=new int[]{Types.VARCHAR,Types.DATE,Types.VARCHAR,Types.VARCHAR,
+            Types.VARCHAR,Types.INTEGER};
      return jdbcTemplate.update(sql, params, types);
     }
 

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 /**
@@ -30,6 +31,7 @@ public class Patient implements Serializable {
     
     private String phone;
 
+    private String insurance;
     
     private List<PatientVisit> patientVisit=new ArrayList<>();
     
@@ -47,6 +49,15 @@ public class Patient implements Serializable {
         this.phone = phone;
     }
 
+    public Patient(int id, String name, Date dob, String address, String phone, String insurance) {
+        this.id = id;
+        this.name = name;
+        this.dob = dob;
+        this.address = address;
+        this.phone = phone;
+        this.insurance = insurance;
+    }
+   
    
 
     public Patient(String name, Date dob, String address, String phone) {
@@ -110,6 +121,14 @@ public class Patient implements Serializable {
 
     public void setPatientVisit(List<PatientVisit> patientVisit) {
         this.patientVisit = patientVisit;
+    }
+
+    public String getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
     }
     
      

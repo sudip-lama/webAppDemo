@@ -26,26 +26,26 @@
                          </h:selectOneMenu>
                         <h:message for="doctorId"
                                    styleClass="requiredErrorClass" />
-                         </h:panelGrid>
-                        </h:panelGroup>
-                        <h:panelGrid columns="4">
-                        <h:outputLabel value="#{Language.valueOf.beginDate}"  />
+                        
+                        
+                        <h:outputLabel value="#{Language.valueOf.beginDate}(MM-DD-YYYY)"  />
                         <h:inputText value="#{searchController.searchCriteria.beginDate}"
                                      id="beginDate" styleClass="required"  >
                             <f:convertDateTime pattern="MM-dd-yyyy"/>
                         </h:inputText>
-                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        
                         <h:message for="beginDate"
                                    styleClass="requiredErrorClass" />
-                        <h:outputLabel value="#{Language.valueOf.endDate}"  />
+                        <h:outputLabel value="#{Language.valueOf.endDate}(MM-DD-YYYY)"  />
                         <h:inputText value="#{searchController.searchCriteria.endDate}"
                                      id="endDate" styleClass="required"  >
                             <f:convertDateTime pattern="MM-dd-yyyy"/>
                         </h:inputText>
-                        <h:outputLabel value="(MM-DD-YYYY)"  />
+                        
                         <h:message for="endDate"
                                    styleClass="requiredErrorClass" />
-                    </h:panelGrid>
+                     </h:panelGrid>
+                        </h:panelGroup>
                     
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
