@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2016 at 08:10 PM
+-- Generation Time: Apr 06, 2016 at 05:17 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -84,6 +84,19 @@ CREATE TABLE IF NOT EXISTS `doctor_detail` (
   `DOCTOR_PHONE` varchar(255) DEFAULT NULL,
   `DOCTOR_SPECIALIST` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`DOCTOR_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicine_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `medicine_detail` (
+  `MEDICINE_id` int(11) NOT NULL AUTO_INCREMENT,
+  `MEDICINE_NAME` varchar(255) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  PRIMARY KEY (`MEDICINE_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

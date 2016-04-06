@@ -146,6 +146,20 @@
     
     <navigation-rule>
         <navigation-case>
+            <from-outcome>medicineMangement</from-outcome>
+            <to-view-id>/pages/medicine/MedicineeManagement.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>medicineMangementRedirect</from-outcome>
+            <to-view-id>/pages/medicine/MedicineManagement.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <navigation-case>
             <from-outcome>billMangement</from-outcome>
             <to-view-id>/pages/bill/BillManagement.xhtml</to-view-id>
         </navigation-case>
