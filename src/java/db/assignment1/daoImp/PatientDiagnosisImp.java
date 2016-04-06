@@ -102,4 +102,15 @@ public class PatientDiagnosisImp implements PatientDiagnosisDao{
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    @Override
+    public int payPatientDiagnosis(PatientDiagnosis patientDiagnosis) {
+         String sql = "UPDATE  PATIENT_DIAGNOSIS "
+                + " SET PAYMENT_STAUS = 1 "
+                + " WHERE PATIENT_DIAGNOSIS_ID = ? ";
+        Object [] params=new Object[]{patientDiagnosis.getId()};
+        int [] types=new int[]{Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types);
+    
+    }
 }

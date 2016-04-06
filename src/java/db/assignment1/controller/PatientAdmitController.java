@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -34,7 +35,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class PatientAdmitController {
 
     @Autowired
@@ -45,7 +46,7 @@ public class PatientAdmitController {
     private RoomService roomService;
     @Autowired
     private DiseaseService diseaseService;
-    
+
     private Admit patientAdmit;
     private List<Admit> patientAdmitList;
     private DataModel<Admit> patientAdmitDataModel;
@@ -91,139 +92,140 @@ public class PatientAdmitController {
     }
 
     public Admit getPatientAdmit() {
-        if(patientAdmit==null)
-        {
-            patientAdmit=new Admit();
+        if (patientAdmit == null) {
+            patientAdmit = new Admit();
         }
         return patientAdmit;
     }
 
-     public String  saveOrEdit()
-    {
+    public String saveOrEdit() {
         //create Admit
-        if(!validPatientAdmit())
-        {
-            message="Insert Valid Patient ID or Room ID or Disease ID or Admit Date";
-               return null;
+        if (!validPatientAdmit()) {
+            message = "Insert Valid Patient ID or Room ID or Disease ID or Admit Date";
+            return null;
         }
-        if(!edit)
-        {
-            if(!isAdmitDateValid())
-            {
-               message="Admit Date must be equal or less than current date";
-               return null;
+        if (!edit) {
+            if (!isAdmitDateValid()) {
+                message = "Admit Date must be equal or less than current date";
+                return null;
             }
-           if(admitService.createAdmitRecord(patientAdmit))
-           {
-               message="Admit  Record Created";
-               patientAdmit=null;
-           }
-           else
-           {
-               message="Error creating Admit Record";
-           }
-           
+            if (admitService.createAdmitRecord(patientAdmit)) {
+                roomList = null;
+                roomSelectItemType = null;
+                message = "Admit  Record Created";
+                patientAdmit = null;
+            } else {
+                message = "Error creating Admit Record";
+            }
+
+        } else {
+            if (admitService.updateAdmitRecord(patientAdmit)) {
+                roomList = null;
+                roomSelectItemType = null;
+                message = " Admit Record Updated";
+                patientAdmit = null;
+            } else {
+
+                message = "Error updating Admit Record";
+            }
+
         }
-        else
-        {
-            if(admitService.updateAdmitRecord(patientAdmit))
-            {
-                message=" Admit Record Updated";
-               patientAdmit=null;
-            }
-            else
-            {
-            
-               message="Error updating Admit Record";
-            }
-            
-            
-        }
-        edit=false;
-        patientAdmitList=null;
-        patientAdmitDataModel=null;
+        edit = false;
+        patientAdmitList = null;
+        patientAdmitDataModel = null;
         return null;
-    
+
     }
-     private boolean validPatientAdmit()
-     {
-         if(patientService.getPatientById(patientAdmit.getPatient().getId())==null)
-             return false;
-         if(roomService.getRoomById(patientAdmit.getRoom().getId())==null)
-             return false;
-         if(diseaseService.getDiseaseById(patientAdmit.getDisease().getId())==null)
-             return true;
-         if(patientAdmit.getAdmitDate()==null)
-             return false;
-         else
-             return true;
-     }
-     public String selectPatientAdmitForEdit() {
+
+    private boolean validPatientAdmit() {
+        if (patientService.getPatientById(patientAdmit.getPatient().getId()) == null) {
+            return false;
+        }
+        if (roomService.getRoomById(patientAdmit.getRoom().getId()) == null) {
+            return false;
+        }
+        if (diseaseService.getDiseaseById(patientAdmit.getDisease().getId()) == null) {
+            return true;
+        }
+        if (patientAdmit.getAdmitDate() == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public String selectPatientAdmitForEdit() {
         try {
             patientAdmit = (Admit) patientAdmitDataModel.getRowData();
             patientAdmit.setPatient(patientService.getPatientById(patientAdmit.getPatientId()));
             patientAdmit.setRoom(roomService.getRoomById(patientAdmit.getRoomId()));
             patientAdmit.setDisease(diseaseService.getDiseaseById(patientAdmit.getDiseaseId()));
-            
+            //adding current room Detail
+            //roomService.payRoom(patientAdmit.getRoomId());
+            roomList.add(patientAdmit.getRoom());
+            roomSelectItemType = null;
             //doctorList = null;
             edit = true;
-            message="";
+            message = "";
         } catch (Exception e) {
             e.printStackTrace();
-            message="Patient Admit couldn't be retrieved.";
+            message = "Patient Admit couldn't be retrieved.";
         }
         return null;
-        }
-     public String selectPatientForAdmit() {
+    }
+
+    public String selectPatientForAdmit() {
         try {
             patientAdmit.setPatient((Patient) patientDataModel.getRowData());
-            patientList=null;
+            patientList = null;
             patientDataModel = null;
+            roomList=null;
+            roomSelectItemType = null;
             //edit = true;
-            message="";
+            message = "";
         } catch (Exception e) {
             e.printStackTrace();
-            message="Patient couldn't be retrieved.";
+            message = "Patient couldn't be retrieved.";
         }
         return null;
-        }
-     public Patient findPatientById(int patientId)
-    {
+    }
+
+    public Patient findPatientById(int patientId) {
         return patientService.getPatientById(patientId);
     }
-     public Room findRoomById(int roomId)
-     {
-         return roomService.getRoomById(roomId);
-     }
-     public Disease findDiseaseById(int diseaseId)
-     {
-         return diseaseService.getDiseaseById(diseaseId);
-     }
-     public boolean isAdmitDateValid()
-    {
-        
-        if(patientAdmit.getAdmitDate().after(new Date()))
+
+    public Room findRoomById(int roomId) {
+        return roomService.getRoomById(roomId);
+    }
+
+    public Disease findDiseaseById(int diseaseId) {
+        return diseaseService.getDiseaseById(diseaseId);
+    }
+
+    public boolean isAdmitDateValid() {
+
+        if (patientAdmit.getAdmitDate().after(new Date())) {
             return false;
-        
+        }
+
         return true;
     }
-    public String searchPatientByName()
-    {
-        patientList=patientService.getAllPatientByPatientName(patientAdmit.getPatient().getName());
-        patientDataModel=null;
+
+    public String searchPatientByName() {
+        patientList = patientService.getAllPatientByPatientName(patientAdmit.getPatient().getName());
+        patientDataModel = null;
         //message=patientVisit.getPatient().getName()+" Clicked search " +patients.size();
         return null;
-       
+
     }
-    
+
     public void setPatientAdmit(Admit patientAdmit) {
         this.patientAdmit = patientAdmit;
     }
 
     public List<Admit> getPatientAdmitList() {
-        if(patientAdmitList==null)
-        {
-            patientAdmitList=admitService.getAllCurrentPatientInHospital();
+        if (patientAdmitList == null) {
+            patientAdmitList = admitService.getAllCurrentPatientInHospital();
         }
         return patientAdmitList;
     }
@@ -233,9 +235,8 @@ public class PatientAdmitController {
     }
 
     public DataModel<Admit> getPatientAdmitDataModel() {
-        if(patientAdmitDataModel==null)
-        {
-            patientAdmitDataModel=new ListDataModel<>(getPatientAdmitList());
+        if (patientAdmitDataModel == null) {
+            patientAdmitDataModel = new ListDataModel<>(getPatientAdmitList());
         }
         return patientAdmitDataModel;
     }
@@ -245,15 +246,13 @@ public class PatientAdmitController {
     }
 
     public List<SelectItem> getRoomSelectItemType() {
-        if(roomSelectItemType==null)
-        {
-            roomSelectItemType= new ArrayList<>();
+        if (roomSelectItemType == null) {
+            roomSelectItemType = new ArrayList<>();
             SelectItem selectItem = new SelectItem(0, "Select");
             roomSelectItemType.add(selectItem);
-            for(Room room:getRoomList())
-            {
-            roomSelectItemType.add(new SelectItem(room.getId(),
-                        room.getRoomNumber() + "(" + room.getRoomType() + ")")); 
+            for (Room room : getRoomList()) {
+                roomSelectItemType.add(new SelectItem(room.getId(),
+                        room.getRoomNumber() + "(" + room.getRoomType() + ")"));
             }
         }
         return roomSelectItemType;
@@ -264,9 +263,8 @@ public class PatientAdmitController {
     }
 
     public List<Room> getRoomList() {
-        if(roomList==null)
-        {
-            roomList=roomService.getAllRoomAvailable();
+        if (roomList == null) {
+            roomList = roomService.getAllRoomAvailable();
         }
         return roomList;
     }
@@ -276,18 +274,16 @@ public class PatientAdmitController {
     }
 
     public List<SelectItem> getDiseaseSelectItemType() {
-         if(diseaseSelectItemType==null)
-        {
-            diseaseSelectItemType= new ArrayList<>();
+        if (diseaseSelectItemType == null) {
+            diseaseSelectItemType = new ArrayList<>();
             SelectItem selectItem = new SelectItem(0, "Select");
             diseaseSelectItemType.add(selectItem);
-            for(Disease disease:getDiseaseList())
-            {
-            diseaseSelectItemType.add(new SelectItem(disease.getId(),
-                        disease.getDiseaseName() + "(" + disease.getDiseaseType() + ")")); 
+            for (Disease disease : getDiseaseList()) {
+                diseaseSelectItemType.add(new SelectItem(disease.getId(),
+                        disease.getDiseaseName() + "(" + disease.getDiseaseType() + ")"));
             }
         }
-        
+
         return diseaseSelectItemType;
     }
 
@@ -296,9 +292,8 @@ public class PatientAdmitController {
     }
 
     public List<Disease> getDiseaseList() {
-        if(diseaseList==null)
-        {
-            diseaseList=diseaseService.getAllDiseaseAvailable();
+        if (diseaseList == null) {
+            diseaseList = diseaseService.getAllDiseaseAvailable();
         }
         return diseaseList;
     }
@@ -308,9 +303,8 @@ public class PatientAdmitController {
     }
 
     public List<Patient> getPatientList() {
-        if(patientList==null)
-        {
-            patientList=new LinkedList<>();
+        if (patientList == null) {
+            patientList = new LinkedList<>();
         }
         return patientList;
     }
@@ -320,9 +314,8 @@ public class PatientAdmitController {
     }
 
     public DataModel<Patient> getPatientDataModel() {
-        if(patientDataModel==null)
-        {
-            patientDataModel=new ListDataModel<>(getPatientList());
+        if (patientDataModel == null) {
+            patientDataModel = new ListDataModel<>(getPatientList());
         }
         return patientDataModel;
     }
@@ -346,6 +339,5 @@ public class PatientAdmitController {
     public void setEdit(boolean edit) {
         this.edit = edit;
     }
-    
-    
+
 }

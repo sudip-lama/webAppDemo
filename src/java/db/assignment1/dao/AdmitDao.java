@@ -19,6 +19,7 @@ import java.util.List;
     public List<Admit> getAllCurrentPatientInHospital();
     public Admit getAdmitById(Integer admitId);
     public int updateAdmitRecord(Admit admit);
+    public int payAdmit(Admit admit);
 }
 
     

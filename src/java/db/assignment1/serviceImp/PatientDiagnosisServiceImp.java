@@ -52,4 +52,10 @@ public class PatientDiagnosisServiceImp implements PatientDiagnosisService {
         return patientDiagnosisDao.update(patientDiagnosis) > 0 ? true : false;
     }
 
+    @Override
+    @Transactional(readOnly = false)
+    public boolean payPatientDiagnosis(PatientDiagnosis patientDiagnosis) {
+      return patientDiagnosisDao.payPatientDiagnosis(patientDiagnosis) > 0 ? true : false;
+    }
+
 }

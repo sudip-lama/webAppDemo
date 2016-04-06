@@ -20,4 +20,5 @@ public interface PatientVisitDao {
     public PatientVisit getPatientVisitById(Integer patientVisitId);
     public int update(PatientVisit patientVisit);
     public List<PatientVisit> getPatientVisitBySearchCriteria(SearchCriteria searchCriteria);
+    public int payPatientVisit(PatientVisit patientVisit);
 }

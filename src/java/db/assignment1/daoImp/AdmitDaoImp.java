@@ -94,5 +94,17 @@ public class AdmitDaoImp implements  AdmitDao {
      return jdbcTemplate.update(sql, params, types);
     
     }
+
+    @Override
+    public int payAdmit(Admit admit) {
+         String sql = "UPDATE  ADMIT_DETAIL "
+                + " SET DISCHARGE_DATE = ? ,"
+                + " PAYMENT_STAUS = 1 , "
+                + " WHERE ADMIT_ID = ? ";
+        Object [] params=new Object[]{admit.getDischargeDate(),
+            admit.getId()};
+        int [] types=new int[]{Types.DATE,Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types);
+    }
     
 }

@@ -45,5 +45,17 @@ public class RoomServiceImp implements RoomService{
     public boolean update(Room room) {
         return roomDaoImp.update(room)>0?true:false;
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public boolean payRoom(Integer roomId) {
+        return roomDaoImp.payRoom(roomId)>0?true:false;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public boolean reserveRoomById(Integer roomId) {
+    return roomDaoImp.reserveRoomById(roomId)>0?true:false;    
+    }
     
 }

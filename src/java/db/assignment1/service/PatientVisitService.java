@@ -20,4 +20,5 @@ public interface PatientVisitService {
     public PatientVisit getPatientVisitById(Integer patientVisitId);
     public boolean updatePatientVisitRecord(PatientVisit patientVisit);
     public List<PatientVisit> searchPatientVisitBySearchCriteria(SearchCriteria searchCriteria);
+    public boolean payPatientVisit(PatientVisit patientVisit);
 }

@@ -58,10 +58,10 @@ public class DiseaseDaoImp implements DiseaseDao{
 
     @Override
     public Disease getDiseaseById(Integer diseaseId) {
-        Disease disease = null;
+        List<Disease> diseaseList = new ArrayList<>();
                 String sql = "SELECT * FROM DISEASE_DETAIL WHERE DISEASE_id = ? ";
                 
-                disease=jdbcTemplate.queryForObject(sql,new Object[]{diseaseId},
+                diseaseList=jdbcTemplate.query(sql,new Object[]{diseaseId},
                         new RowMapper<Disease>() {
 
            @Override
@@ -73,7 +73,11 @@ public class DiseaseDaoImp implements DiseaseDao{
                return disease;
            }
        });
-               return disease; 
+                if(diseaseList.isEmpty())
+                     return null;
+                 else
+                     return diseaseList.get(0); 
+               
     
     }
 

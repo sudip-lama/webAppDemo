@@ -90,6 +90,12 @@ public class PatientVisitServiceImp implements PatientVisitService{
     public void setPatientDao(PatientDao patientDao) {
         this.patientDao = patientDao;
     }
+
+    @Override
+    @Transactional(readOnly = false)
+    public boolean payPatientVisit(PatientVisit patientVisit) {
+        return patientVisitDao.payPatientVisit(patientVisit)>0?true:false; 
+    }
     
     
 }

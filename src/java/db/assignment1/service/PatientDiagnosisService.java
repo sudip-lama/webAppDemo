@@ -17,4 +17,5 @@ public interface PatientDiagnosisService {
     public List<PatientDiagnosis> getAllPatientDiagnosis();
     public PatientDiagnosis getPatientDiagnosisById(Integer patientDiagnosisId);
     public boolean update(PatientDiagnosis patientDiagnosis);
+   public boolean payPatientDiagnosis(PatientDiagnosis patientDiagnosis);
 }

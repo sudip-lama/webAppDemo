@@ -59,11 +59,11 @@ public class RoomDaoImp implements RoomDao{
 
     @Override
     public Room getRoomById(Integer roomId) {
-        Room room = null;
-                String sql = "SELECT * FROM ROOM_DETAIL WHERE ROOM_id = ? "
-                        + " AND ROOM_AVAILABLE = 0";
+         List<Room> roomList = new ArrayList<>();
+       // Room room = null;
+                String sql = "SELECT * FROM ROOM_DETAIL WHERE ROOM_id = ? ";
                 
-                room=jdbcTemplate.queryForObject(sql,new Object[]{roomId},
+                roomList=jdbcTemplate.query(sql,new Object[]{roomId},
                         new RowMapper<Room>() {
                         
            @Override
@@ -75,9 +75,12 @@ public class RoomDaoImp implements RoomDao{
                return room;
            }
        });
-               return room; 
+               if(roomList.isEmpty())
+                     return null;
+                 else
+                     return roomList.get(0);
     
-                        }
+        }
 
     @Override
     public int update(Room room) {
@@ -91,5 +94,27 @@ public class RoomDaoImp implements RoomDao{
         int [] types=new int[]{Types.VARCHAR,Types.VARCHAR,Types.DOUBLE,Types.INTEGER};
      return jdbcTemplate.update(sql, params, types);
     
+    }
+
+    @Override
+    
+    public int payRoom(Integer roomId) {
+        String sql = "UPDATE  ROOM_DETAIL "
+               + " SET ROOM_AVAILABLE = 0 "
+                + " WHERE ROOM_id = ? ";
+        Object [] params=new Object[]{roomId};
+        int [] types=new int[]{Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types);
+    
+    }
+
+    @Override
+    public int reserveRoomById(Integer roomId) {
+        String sql = "UPDATE  ROOM_DETAIL "
+               + " SET ROOM_AVAILABLE = 1 "
+                + " WHERE ROOM_id = ? ";
+        Object [] params=new Object[]{roomId};
+        int [] types=new int[]{Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types);
     }
 }

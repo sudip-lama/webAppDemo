@@ -18,5 +18,6 @@ public interface PatientDiagnosisDao {
     public List<PatientDiagnosis> getAllPatientDiagnosis();
     public PatientDiagnosis getPatientDiagnosisById(Integer patientDiagnosisId);
     public int update(PatientDiagnosis patientDiagnosis);
+    public int payPatientDiagnosis(PatientDiagnosis patientDiagnosis);
  
 }

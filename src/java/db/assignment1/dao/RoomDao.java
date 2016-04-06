@@ -19,4 +19,6 @@ public interface RoomDao {
     public List<Room> getAllRoomAvailable();
     public Room getRoomById(Integer roomId);
     public int update(Room room);
+    public int payRoom(Integer roomId);
+    public int reserveRoomById(Integer roomId);
 }

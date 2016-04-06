@@ -16,5 +16,6 @@ public interface AdmitService {
   public boolean createAdmitRecord(Admit admit);
     public List<Admit> getAllCurrentPatientInHospital();
     public Admit getAdmitById(Integer admitId);
-    public boolean updateAdmitRecord(Admit admit);  
+    public boolean updateAdmitRecord(Admit admit); 
+    public boolean payAdmit(Admit admit);
 }

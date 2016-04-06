@@ -18,4 +18,6 @@ public interface RoomService {
     public List<Room> getAllRoomAvailable();
     public Room getRoomById(Integer roomId);
     public boolean update(Room room);
+    public boolean payRoom(Integer roomId);
+    public boolean reserveRoomById(Integer roomId);
 }

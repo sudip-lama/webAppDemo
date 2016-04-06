@@ -171,5 +171,15 @@ public class PatientVisitDaoImp implements PatientVisitDao{
                return patientVisitList;
     
     }
+
+    @Override
+    public int payPatientVisit(PatientVisit patientVisit) {
+       String sql = "UPDATE  PATIENT_VISIT "
+                + " SET PAYMENT_STAUS = 1 "
+                + " WHERE PATIENT_VISIT_ID = ? ";
+        Object [] params=new Object[]{patientVisit.getId()};
+        int [] types=new int[]{Types.INTEGER};
+     return jdbcTemplate.update(sql, params, types); 
+    }
     
 }
