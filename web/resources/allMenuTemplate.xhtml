@@ -72,6 +72,10 @@
                                                                action="roomMangementRedirect"
                                                                immediate="true"
                                                                />   </li> 
+                                            <li><h:commandLink value="#{Language.valueOf.medicineTitle}"
+                                                               action="medicineMangementRedirect"
+                                                               immediate="true"
+                                                               />   </li> 
                                         </ul>
 
                                     </li>
@@ -129,6 +133,11 @@
         
                         <h:commandLink value="RoomManagement"
                                        action="roomMangementRedirect"
+                                       immediate="true"
+                                       style="padding-left: 10px;"/>
+                        
+                        <h:commandLink value="MedicineManagement"
+                                       action="medicineMangementRedirect"
                                        immediate="true"
                                        style="padding-left: 10px;"/>
                          

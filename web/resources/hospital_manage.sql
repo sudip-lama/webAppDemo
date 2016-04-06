@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2016 at 07:11 AM
--- Server version: 5.6.17-log
+-- Generation Time: Apr 06, 2016 at 05:17 AM
+-- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -135,6 +135,19 @@ INSERT INTO `doctor_detail` (`DOCTOR_id`, `DOCTOR_ADDRESS`, `DELETE_STATUS`, `DO
 (1, 'Ted Street', b'0', 'Fred', '45244', 'Neurology'),
 (2, 'Friendly', b'0', 'Jing', '46252', 'Cardiothoracic Radiology'),
 (3, 'test', b'0', 'test', 'tes', 'tss');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medicine_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `medicine_detail` (
+  `MEDICINE_id` int(11) NOT NULL AUTO_INCREMENT,
+  `MEDICINE_NAME` varchar(255) DEFAULT NULL,
+  `PRICE` double DEFAULT NULL,
+  PRIMARY KEY (`MEDICINE_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

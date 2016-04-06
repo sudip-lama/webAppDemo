@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.medicineTitle}
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="medicineManagementForm">
+                    <h:outputLabel value="#{medicineController.message}"/>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="#{Language.valueOf.medicineName}"  />
+                        <h:inputText value="#{medicineController.medicine.medicineName}" id="medicineName"
+                                     styleClass="required" />
+                        <h:message for="medicineName"
+                                   styleClass="requiredErrorClass" />
+
+                        <h:outputLabel value="#{Language.valueOf.price}"  />
+                        <h:inputText value="#{medicineController.medicine.price}"
+                                     id="price" styleClass="required" />
+                        <h:message for="price"
+                                   styleClass="requiredErrorClass" />
+
+                        
+
+                        
+                       
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{medicineController.edit? Language.valueOf.update : Language.valueOf.save}"
+                                         id="submit" 
+                                         action="#{medicineController.saveOrEdit()}" />
+                        <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
+                                         action="medicineMangementRedirect" />
+                    </h:panelGrid>
+                        
+                    <h:panelGroup >
+                        <h:dataTable id="medicineList" var="medicine" rows="10"
+                                     border="1"
+                                     
+                                     value="#{medicineController.medicineList}"
+                                 >
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.serialNo}" />
+                                </f:facet>
+                                <h:outputLabel value="#{medicineController.medicineList.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.medicineId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{medicine.id}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.medicineName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{medicine.medicineName}" />
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.price}" />
+                                </f:facet>
+                                 <h:outputLabel value="#{medicine.price}" />
+                            </h:column>
+
+                           
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.medicineId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{medicine.id}" />
+                            </h:column>
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.edit}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="Edit">
+                                            <f:ajax event="click" listener="#{medicineController.getDiseaseForEdit()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
