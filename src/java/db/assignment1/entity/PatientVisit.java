@@ -20,6 +20,9 @@ public class PatientVisit {
     private String reason;
     
     private Date vistDate;
+    //@Column(name = "PAYED_DATE")
+   // @Temporal(TemporalType.DATE)
+    private Date payedDate;
     
     private Patient patient;
     
@@ -168,5 +171,13 @@ public class PatientVisit {
     public String  visitTime()
     {
         return this.hr+":"+this.min+"  "+this.amPm;
+    }
+
+    public Date getPayedDate() {
+        return payedDate;
+    }
+
+    public void setPayedDate(Date payedDate) {
+        this.payedDate = payedDate;
     }
 }

@@ -16,7 +16,10 @@ public class PatientDiagnosis {
     private int id;
         
     private Date diagnosisDate;
-      
+    //@Column(name = "PAYED_DATE")
+   // @Temporal(TemporalType.DATE)
+    private Date payedDate;
+    
     private Patient patient;
     
     private Diagnosis diagnosis;
@@ -132,6 +135,14 @@ public class PatientDiagnosis {
 
     public void setDiagnosisId(int diagnosisId) {
         this.diagnosisId = diagnosisId;
+    }
+
+    public Date getPayedDate() {
+        return payedDate;
+    }
+
+    public void setPayedDate(Date payedDate) {
+        this.payedDate = payedDate;
     }
 
 }

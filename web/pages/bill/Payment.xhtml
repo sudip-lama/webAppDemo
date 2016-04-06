@@ -12,28 +12,28 @@
             </ui:define>
             <ui:define name="content">
                 <h:form id="patientAdmitManagementForm">
-                    <h:outputLabel value="#{patientAdmitController.message}"/>
+                    <h:outputLabel value="#{paymentController.message}"/>
                     <!-- Find patientID -->
                    
                     <h:panelGroup>   
                     <h:panelGrid columns="9">
                        <h:form id="patientSearchForm">
                         <h:outputLabel value="#{Language.valueOf.patientId}"  />
-                        <h:inputText value="#{patientAdmitController.patientAdmit.patient.id}" id="pId"
+                        <h:inputText value="#{paymentController.patient.id}" id="pId"
                                      styleClass="required"
                                     />
                         <h:message for="pId"
                                    styleClass="requiredErrorClass" /> 
                         <h:outputLabel />
                         <h:outputLabel value="#{Language.valueOf.patientName}"  />
-                        <h:inputText value="#{patientAdmitController.patientAdmit.patient.name}" id="pName"
+                        <h:inputText value="#{paymentController.patient.name}" id="pName"
                                      styleClass="required" />
                         <h:message for="pName"
                                    styleClass="requiredErrorClass" />    
                        <h:outputLabel />
                          <h:commandButton value="#{Language.valueOf.search}"
                                           id="search" 
-                         action="#{patientAdmitController.searchPatientByName()}" />
+                         action="#{paymentController.searchPatientByName()}" />
                        </h:form>
                         </h:panelGrid>
                         </h:panelGroup> 

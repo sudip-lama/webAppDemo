@@ -18,26 +18,140 @@
                 <h:outputScript library="js" name="jquery-2.0.0.min.js"/>
                 <h:outputScript library="js" name="highcharts.js"/>
                 <h:outputScript library="js" name="exporting.js"/>
-                <h:outputScript  >
-                    
-                    
-                </h:outputScript>
+                 
             </ui:define>
             <ui:define name="content">
-                #{Language.valueOf.applicationName}
-                
-                
-                <div style="width:45%; height: 100%;float: left;">
-                    <h:form>
-                        <div style="width:100%; height: 50%;float: left;">
-                            <h:panelGrid  columns="1" id="lineGraphPanel"
-                                        styleClass="dashboardLineGraphPanel">
-                                <div id="lineChartContainer"/>
-                            </h:panelGrid>
-                        </div>
+               <script>
+                 
+     $(function () {
+    $('#lineChart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ' UNCG Hospital'
+        },
+        subtitle: {
+            text: 'Average Length of Stay by type of Disease'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Days'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} days</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Average Stay',
+            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
-                    </h:form>
+        
+
+        }]
+    });
+});
+
+                
+     $(function () {
+    $('#lineChart1').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ' UNCG Hospital'
+        },
+        subtitle: {
+            text: 'Average Length of Stay by type of Disease'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Days'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} days</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Average Stay',
+            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+        
+
+        }]
+    });
+});
+                    
+                 </script>
+                <div style="width:45%; height: 100%;float: left;">
+                <div id="lineChart" style="min-width: 310px; height: 400px; margin: 0 auto">
+                    
                 </div>
+                </div> 
+                 <div style="width:45%; height: 100%;float: right;">
+                <div id="lineChart1" style="min-width: 310px; height: 400px; margin: 0 auto">
+                    
+                
+                </div>
+                 </div>
             </ui:define>
         </ui:composition>
 
