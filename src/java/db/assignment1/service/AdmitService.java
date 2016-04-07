@@ -18,4 +18,6 @@ public interface AdmitService {
     public Admit getAdmitById(Integer admitId);
     public boolean updateAdmitRecord(Admit admit); 
     public boolean payAdmit(Admit admit);
+    public Admit getAdmitByPatientId(Integer patientId);
+    public List<Admit> getAverageStayByDisease();
 }

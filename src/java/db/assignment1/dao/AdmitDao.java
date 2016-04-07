@@ -20,6 +20,8 @@ import java.util.List;
     public Admit getAdmitById(Integer admitId);
     public int updateAdmitRecord(Admit admit);
     public int payAdmit(Admit admit);
+    public Admit getAdmitByPatientId(Integer patientId);
+    public List<Admit> getAverageStayByDisease();
 }
 
     

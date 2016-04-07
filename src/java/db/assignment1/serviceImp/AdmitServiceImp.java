@@ -95,4 +95,14 @@ public class AdmitServiceImp implements AdmitService {
         this.roomDao = roomDao;
     }
 
+    @Override
+    public Admit getAdmitByPatientId(Integer patientId) {
+    return admitDao.getAdmitByPatientId(patientId);
+    }
+
+    @Override
+    public List<Admit> getAverageStayByDisease() {
+       return admitDao.getAverageStayByDisease();
+    }
+
 }

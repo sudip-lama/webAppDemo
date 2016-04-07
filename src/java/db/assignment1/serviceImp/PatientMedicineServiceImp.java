@@ -7,6 +7,7 @@ package db.assignment1.serviceImp;
 
 import db.assignment1.dao.PatientMedicineDao;
 import db.assignment1.entity.PatientMedication;
+import db.assignment1.service.MedicineService;
 import db.assignment1.service.PatientMedicineService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class PatientMedicineServiceImp implements PatientMedicineService{
 
     @Autowired
     private PatientMedicineDao patientMedicineDao;
+    @Autowired
+    private MedicineService medicineService;
     
     @Override
     @Transactional(readOnly = false)
@@ -42,7 +45,29 @@ public class PatientMedicineServiceImp implements PatientMedicineService{
 
     @Override
     public List<PatientMedication> getTopPatientMedicine() {
-        return patientMedicineDao.getTopPatientMedicine();
+        
+        List<PatientMedication> patientMedicineList=patientMedicineDao.getTopPatientMedicine();
+        for(PatientMedication pm:patientMedicineList)
+        {
+            pm.setMedicine(medicineService.getMedicineById(pm.getMedicineId()));
+        }
+        return patientMedicineList;
+    }
+
+    public PatientMedicineDao getPatientMedicineDao() {
+        return patientMedicineDao;
+    }
+
+    public void setPatientMedicineDao(PatientMedicineDao patientMedicineDao) {
+        this.patientMedicineDao = patientMedicineDao;
+    }
+
+    public MedicineService getMedicineService() {
+        return medicineService;
+    }
+
+    public void setMedicineService(MedicineService medicineService) {
+        this.medicineService = medicineService;
     }
     
 }

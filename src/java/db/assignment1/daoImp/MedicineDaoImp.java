@@ -57,10 +57,10 @@ public class MedicineDaoImp implements MedicineDao{
 
     @Override
     public Medicine getMedicineById(Integer medicineId) {
-        Medicine medicine = null;
+         List<Medicine> medicineList = new ArrayList<>();
                 String sql = "SELECT * FROM MEDICINE_DETAIL WHERE MEDICINE_id = ? ";
                 
-                medicine=jdbcTemplate.queryForObject(sql,new Object[]{medicineId},
+                medicineList=jdbcTemplate.query(sql,new Object[]{medicineId},
                         new RowMapper<Medicine>() {
 
            @Override
@@ -71,7 +71,10 @@ public class MedicineDaoImp implements MedicineDao{
                return medicine;
            }
        });
-               return medicine; 
+             if(medicineList.isEmpty())
+                     return null;
+                 else
+                     return medicineList.get(0); 
     
     }
 

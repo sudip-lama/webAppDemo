@@ -99,12 +99,58 @@ public class AdmitDaoImp implements  AdmitDao {
     public int payAdmit(Admit admit) {
          String sql = "UPDATE  ADMIT_DETAIL "
                 + " SET DISCHARGE_DATE = ? ,"
-                + " PAYMENT_STAUS = 1 , "
+                + " PAYMENT_STAUS = 1  "
                 + " WHERE ADMIT_ID = ? ";
         Object [] params=new Object[]{admit.getDischargeDate(),
             admit.getId()};
         int [] types=new int[]{Types.DATE,Types.INTEGER};
      return jdbcTemplate.update(sql, params, types);
+    }
+
+    @Override
+    public Admit getAdmitByPatientId(Integer patientId) {
+        List<Admit> admitList = new ArrayList<>();
+                String sql = "SELECT * FROM ADMIT_DETAIL WHERE "
+                        + " PAYMENT_STAUS = 0 "
+                        + " AND PATIENT_ID = ? ";
+                
+                 admitList=jdbcTemplate.query(sql,new Object[]{patientId},
+                        new RowMapper<Admit>() {
+
+           @Override
+           public Admit mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Admit admit=new Admit(rs.getInt("ADMIT_ID"),
+                       rs.getDate("ADMIT_DATE"),
+                       rs.getInt("PATIENT_ID"),
+                       rs.getInt("ROOM_ID"),rs.getInt("DISEASE_ID"));
+               return admit;
+           }
+       });
+                 if(admitList.isEmpty())
+                     return null;
+                 else
+                     return admitList.get(0); 
+    }
+
+    @Override
+    public List<Admit> getAverageStayByDisease() {
+        List<Admit> admitList = new ArrayList<>();
+                String sql = "SELECT DISEASE_ID, AVG (DISCHARGE_DATE-ADMIT_DATE) AS AVG_STAY "
+                        + " FROM ADMIT_DETAIL "
+                        + " WHERE PAYMENT_STAUS = 1"
+                        + " GROUP BY DISEASE_ID ";
+                
+                 admitList=jdbcTemplate.query(sql,
+                        new RowMapper<Admit>() {
+
+           @Override
+           public Admit mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Admit admit=new Admit(rs.getInt("DISEASE_ID"),
+                       rs.getDouble("AVG_STAY"));
+               return admit;
+           }
+       });
+                return admitList;
     }
     
 }

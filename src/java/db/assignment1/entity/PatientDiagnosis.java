@@ -14,28 +14,28 @@ import java.util.Date;
  */
 public class PatientDiagnosis {
     private int id;
-        
     private Date diagnosisDate;
-    //@Column(name = "PAYED_DATE")
-   // @Temporal(TemporalType.DATE)
     private Date payedDate;
-    
     private Patient patient;
-    
     private Diagnosis diagnosis;
-    
     private Doctor doctor;
-    
-    
     private boolean paymentStatus;
-
     private int doctorId;
-    
     private int patientId;
-    
     private int diagnosisId;
+    private String diagnosisName;
+    private double diagnosisPrice;
 
     public PatientDiagnosis() {
+    }
+
+    public PatientDiagnosis(int id, Date diagnosisDate, int diagnosisId, 
+            String diagnosisName, double diagnosisPrice) {
+        this.id = id;
+        this.diagnosisDate = diagnosisDate;
+        this.diagnosisId = diagnosisId;
+        this.diagnosisName = diagnosisName;
+        this.diagnosisPrice = diagnosisPrice;
     }
 
     public PatientDiagnosis(int id, Date diagnosisDate,  int patientId, int doctorId, int diagnosisId) {
@@ -143,6 +143,22 @@ public class PatientDiagnosis {
 
     public void setPayedDate(Date payedDate) {
         this.payedDate = payedDate;
+    }
+
+    public String getDiagnosisName() {
+        return diagnosisName;
+    }
+
+    public void setDiagnosisName(String diagnosisName) {
+        this.diagnosisName = diagnosisName;
+    }
+
+    public double getDiagnosisPrice() {
+        return diagnosisPrice;
+    }
+
+    public void setDiagnosisPrice(double diagnosisPrice) {
+        this.diagnosisPrice = diagnosisPrice;
     }
 
 }

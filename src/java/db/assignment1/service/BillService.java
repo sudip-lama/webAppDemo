@@ -7,15 +7,13 @@ package db.assignment1.service;
 
 
 import db.assignment1.entity.Bill;
+import db.assignment1.entity.BillDetail;
 import java.util.List;
 /**
  *
  * @author maha
  */
 public interface BillService {
-    public boolean createBillRecord(Bill bill);
-    public List<Bill> getAllBillAvailable();
-    public Bill getBillById(Integer BillId);
-    public boolean update(Bill bill);
-
+    public Bill getAllBillAvailableByPatientId(int patientId);
+public boolean payBill(List<BillDetail> billDetailList);
 }

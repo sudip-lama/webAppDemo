@@ -11,6 +11,7 @@ import db.assignment1.entity.Room;
 import db.assignment1.service.DoctorService;
 import db.assignment1.service.RoomService;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.NoneScoped;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ManagedBean
-@RequestScoped
+@NoneScoped
 public class RoomController {
     
     @Autowired

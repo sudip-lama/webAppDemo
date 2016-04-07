@@ -109,6 +109,11 @@ public class PatientAdmitController {
                 message = "Admit Date must be equal or less than current date";
                 return null;
             }
+            if(admitService.getAdmitByPatientId(patientAdmit.getPatient().getId())!=null)
+            {
+                 message = "Patient is already admitted in Hospital";
+                return null;
+            }
             if (admitService.createAdmitRecord(patientAdmit)) {
                 roomList = null;
                 roomSelectItemType = null;

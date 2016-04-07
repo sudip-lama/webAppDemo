@@ -18,37 +18,31 @@ public class PatientMedication {
    
     //@Column(name = "PATIENT_MEDICINE_id")
     private int id;
-    
-    
-    //@JoinColumn(name = "PATIENT_ID")
     private Patient patient;
-    
-    //@JoinColumn(name = "MEDICINE_ID")
     private Medicine medicine;
-    
-    
-    
     private Date payedDate;
-    
-    //@Column(name = "PURCHASE_DATE")
-    
     private Date purchaseDate;
-    
-    //@Column(name = "PAYMENT_STAUS")
     private boolean paymentStatus;
-    
-  //@Column(name = "MEDICINE_QUANTITY")
     private int medicineQuantity;
-    
     private int totalQuantity;
-    
-    
     private int patientId;
-    
-    
     private int medicineId;
+    private String medicineName;
+    private double price;
+    
+    
 
     public PatientMedication() {
+    }
+
+    public PatientMedication(int id, Date purchaseDate, int medicineQuantity,
+            int medicineId, String medicineName, double price) {
+        this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.medicineQuantity = medicineQuantity;
+        this.medicineId = medicineId;
+        this.medicineName = medicineName;
+        this.price = price;
     }
 
     public PatientMedication(int totalQuantity, int medicineId) {
@@ -142,6 +136,22 @@ public class PatientMedication {
 
     public void setTotalQuantity(int totalQuantity) {
         this.totalQuantity = totalQuantity;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
     
     

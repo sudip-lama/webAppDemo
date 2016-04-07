@@ -9,6 +9,7 @@ package db.assignment1.serviceImp;
 
 import db.assignment1.dao.BillDao;
 import db.assignment1.entity.Bill;
+import db.assignment1.entity.BillDetail;
 import db.assignment1.service.BillService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,26 +27,16 @@ public class BillServiceImp implements BillService{
     @Autowired
     private BillDao billDaoImp;
     
+    
     @Override
-    @Transactional(readOnly = false)
-    public boolean createBillRecord(Bill bill) {
-        return billDaoImp.createBillRecord(bill)>0?true:false;
-    }
-
-    @Override
-    public List<Bill> getAllBillAvailable() {
-        return billDaoImp.getAllBillAvailable();
-    }
-
-    @Override
-    public Bill getBillById(Integer billId) {
-        return billDaoImp.getBillById(billId);
+    public Bill getAllBillAvailableByPatientId(int patientId) {
+    return billDaoImp.getAllBillAvailableByPatientId(patientId);
     }
 
     @Override
     @Transactional(readOnly = false)
-    public boolean update(Bill bill) {
-        return billDaoImp.update(bill)>0?true:false;
+    public boolean payBill(List<BillDetail> billDetailList) {
+    return billDaoImp.payBill(billDetailList);
     }
 
     

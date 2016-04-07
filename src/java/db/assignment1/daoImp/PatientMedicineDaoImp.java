@@ -111,11 +111,9 @@ public class PatientMedicineDaoImp implements PatientMedicineDao {
     @Override
     public List<PatientMedication> getTopPatientMedicine() {
         List<PatientMedication> patientMedicationList = new ArrayList<>();
-        String sql = "SELECT MEDICINE_ID, sum(MEDICINE_QUANTITY) AS TOTAT_QUANTITY"
-                + "FROM PATIENT_MEDICINE "
-                + " GROUP BY MEDICINE_ID "
-                + " ORDER BY TOTAT_QUANTITY DESC "
-                + " LIMIT 10 ";
+        String sql = "SELECT MEDICINE_ID, SUM( MEDICINE_QUANTITY ) AS TOTAT_QUANTITY"
+                + " FROM PATIENT_MEDICINE "
+                + " GROUP BY MEDICINE_ID ";
 
         patientMedicationList = jdbcTemplate.query(sql,
                 new RowMapper<PatientMedication>() {
@@ -123,8 +121,8 @@ public class PatientMedicineDaoImp implements PatientMedicineDao {
                     @Override
                     public PatientMedication mapRow(ResultSet rs, int rowNum) throws SQLException {
                         PatientMedication patientMedication = new PatientMedication(
-                                rs.getInt("MEDICINE_ID"),
-                                rs.getInt("MEDICINE_QUANTITY"));
+                                rs.getInt("TOTAT_QUANTITY"),rs.getInt("MEDICINE_ID")
+                                );
                         return patientMedication;
                     }
                 });

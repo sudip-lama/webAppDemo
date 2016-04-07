@@ -7,6 +7,7 @@ package db.assignment1.dao;
 
 
 import db.assignment1.entity.Bill;
+import db.assignment1.entity.BillDetail;
 import java.util.List;
 
 /**
@@ -14,10 +15,9 @@ import java.util.List;
  * @author maha
  */
 public interface BillDao {
-    public int createBillRecord(Bill bill);
-    public List<Bill> getAllBillAvailable();
-    public Bill getBillById(Integer billId);
-    public int update(Bill bill);
-
+   
+    
+    public Bill getAllBillAvailableByPatientId(int patientId);
+    public boolean payBill(List<BillDetail> billDetailList);
     
 }

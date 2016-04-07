@@ -14,77 +14,65 @@ import java.util.List;
  * @author maha
  */
 public class Bill {
-    private int id;
     
-    private String billNumber;
+    private List<PatientMedication> patientMedicationList;
+    private List<Admit>admitList;
+    private List<PatientVisit>patientVisitList;
+    private List<PatientDiagnosis>patientDiagnosisList;
     
-    private Date billDate;
-    
-    private double total;
-
-    private String preparedBy;
-
     public Bill() {
     }
-    
-   public Bill(String billNumber, Date billDate, double total, String preparedBy) {
-        this.billNumber= billNumber; 
-        this.billDate= billDate;
-        this.total= total;
-        this.preparedBy = preparedBy;
+   
+
+    public List<PatientMedication> getPatientMedicationList() {
+        if(patientMedicationList==null)
+        {
+            patientMedicationList=new ArrayList<>();
+        }
+        return patientMedicationList;
     }
 
-    public Bill(int id, String billNumber, Date billDate, double total, String preparedBy ) {
-        this.id = id;
-        this.billNumber= billNumber; 
-        this.billDate= billDate;
-        this.total= total;
-        this.preparedBy = preparedBy;
+    public void setPatientMedicationList(List<PatientMedication> patientMedicationList) {
+        this.patientMedicationList = patientMedicationList;
+    }
+
+    public List<Admit> getAdmitList() {
+        if(admitList==null)
+        {
+            admitList=new ArrayList<>();
+        }
+        return admitList;
+    }
+
+    public void setAdmitList(List<Admit> admitList) {
+        this.admitList = admitList;
+    }
+
+    public List<PatientVisit> getPatientVisitList() {
+        if(patientVisitList==null)
+        {
+            patientVisitList=new ArrayList<>();
+        }
+        return patientVisitList;
+    }
+
+    public void setPatientVisitList(List<PatientVisit> patientVisitList) {
+        this.patientVisitList = patientVisitList;
+    }
+
+    public List<PatientDiagnosis> getPatientDiagnosisList() {
+         if(patientDiagnosisList==null)
+        {
+            patientDiagnosisList=new ArrayList<>();
+        }
+        return patientDiagnosisList;
+    }
+
+    public void setPatientDiagnosisList(List<PatientDiagnosis> patientDiagnosisList) {
+        this.patientDiagnosisList = patientDiagnosisList;
+    }
+
         
-    } 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getBillNumber() {
-        return billNumber;
-    }
-
-    public void setBillNumber(String billNumber) {
-        this.billNumber = billNumber;
-    }
-
-    public Date getBillDate() {
-        return billDate;
-    }
-
-    public void setBillDate(Date billDate) {
-        this.billDate = billDate;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public String getPreparedBy() {
-        return preparedBy;
-    }
-
-    public void setPreparedBy(String preparedBy) {
-        this.preparedBy = preparedBy;
-    }
-    
-    
-    
 }
 
 

@@ -4,113 +4,163 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-
-    </h:head>
+    
     <h:body>
-        <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+       <ui:composition template="./../../resources/allMenuTemplate.xhtml">
             <ui:define name="title">
                 #{Language.valueOf.billTitle}
             </ui:define>
             <ui:define name="content">
                 <h:form id="billManagementForm">
                     <h:outputLabel value="#{billController.message}"/>
-                    <h:panelGrid columns="3">
-                        <h:outputLabel value="#{Language.valueOf.billNumber}"  />
-                        <h:inputText value="#{billController.bill.billNumber}" id="billNumber"
+                    <!-- Find patientID -->
+                   
+                    <h:panelGroup>   
+                    <h:panelGrid columns="9">
+                       <h:form id="patientSearchForm">
+                        <h:outputLabel value="#{Language.valueOf.patientId}"  />
+                        <h:inputText value="#{billController.patient.id}" id="pId"
+                                     styleClass="required"
+                                    />
+                        <h:message for="pId"
+                                   styleClass="requiredErrorClass" /> 
+                        <h:outputLabel />
+                        <h:outputLabel value="#{Language.valueOf.patientName}"  />
+                        <h:inputText value="#{billController.patient.name}" id="pName"
                                      styleClass="required" />
-                        <h:message for="billNumber"
-                                   styleClass="requiredErrorClass" />
-
-                        <h:outputLabel value="#{Language.valueOf.billDate}"  />
-                        <h:inputText value="#{billController.bill.billDate}"
-                                     id="billDate" styleClass="required" />
-                        <h:message for="billDate"
-                                   styleClass="requiredErrorClass" />
-
-                        <h:outputLabel value="#{Language.valueOf.total}"  />
-                        <h:inputText value="#{billController.bill.total}"
-                                     id="total" styleClass="required" />
-                        <h:message for="total"
-                                   styleClass="requiredErrorClass" />
-                        
-                        <h:outputLabel value="#{Language.valueOf.preparedBy}"  />
-                        <h:inputText value="#{billController.bill.preparedBy}" id="preparedBy"
-                                     styleClass="required" />
-                        <h:message for="preparedBy"
-                                   styleClass="requiredErrorClass" />
-
+                        <h:message for="pName"
+                                   styleClass="requiredErrorClass" />    
+                       <h:outputLabel />
+                         <h:commandButton value="#{Language.valueOf.search}"
+                                          id="search" 
+                         action="#{billController.searchPatientByName()}" />
+                       </h:form>
+                        </h:panelGrid>
+                        </h:panelGroup> 
+                  
+                   
+                    
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{Language.valueOf.viewBill }"
+                                         id="submit" 
+                                         action="#{billController.viewBill()}" />
                        
                     </h:panelGrid>
-
-                    <h:panelGrid columns="3" >
-                        <h:outputLabel />
-                        <h:commandButton value="#{billController.edit? Language.valueOf.update : Language.valueOf.save}"
-                                         id="submit" 
-                                         action="#{billController.saveOrEdit()}" />
-                        <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
-                                         action="billMangementRedirect" />
-                    </h:panelGrid>
-                        
+                        <br/><br/>
                     <h:panelGroup >
-                        <h:dataTable id="billList" var="bill" rows="10"
+                        <h:dataTable id="patientList" var="patient" rows="10"
                                      border="1"
-                                     
-                                     value="#{billController.billList}"
+                                     rendered="#{billController.patientList.size()>0}"  
+                                     value="#{billController.patientDataModel}"
                                  >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.searchedPatient}" />
+                             </f:facet>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="#{Language.valueOf.id}" />
                                 </f:facet>
-                                <h:outputLabel value="#{billController.billList.rowIndex+1}"/>
+                                <h:outputLabel value="#{billController.patientDataModel.rowIndex+1}"/>
                             </h:column>     
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.billId}" />
+                                    <h:outputLabel value="#{Language.valueOf.patientId}" />
                                 </f:facet>
-                                <h:outputLabel value="#{bill.id}" />
+                                <h:outputLabel value="#{patient.id}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.billNumber}" />
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
                                 </f:facet>
-                                <h:outputLabel value="#{bill.billNumber}" />
+                                <h:outputLabel value="#{patient.name}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.billDate}" />
+                                    <h:outputLabel value="#{Language.valueOf.address}" />
                                 </f:facet>
-                                <h:outputLabel value="#{bill.billDate}" />
+                                <h:outputLabel value="#{patient.address}" />
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.total}" />
+                                    <h:outputLabel value="#{Language.valueOf.phone}" />
                                 </f:facet>
-                                <h:outputLabel value="#{bill.total}" />
+                                <h:outputLabel value="#{patient.phone}" />
                             </h:column>
-                            
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.preparedBy}" />
-                                </f:facet>
-                                <h:outputLabel value="#{bill.preparedBy}" />
-                            </h:column>
-                            
                            <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="#{Language.valueOf.edit}"/>
+                                        <h:outputText value="#{Language.valueOf.add}"/>
                                     </f:facet>
                                     <center>
-                                        <h:commandLink id="editRoleGroup" value="Edit">
-                                            <f:ajax event="click" listener="#{billController.getBillForEdit()}" render="@form"/>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.add}">
+                                            <f:ajax event="click" listener="#{billController.selectPatientForBill()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>
                                 </h:column>
                         </h:dataTable>
+                    </h:panelGroup>
+                        <br/>
+                        <br/>
+                    <!-- All Patient Medication List-->
+                    <h:panelGroup rendered="#{billController.billDetailList.size()>0}">
+                        <h:dataTable id="patientDiagnosisList" var="billDetail" rows="10"
+                                     border="1"
+                                       
+                                     value="#{billController.billDetailDataModel}"
+                                 >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.totalBills}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{billController.billDetailDataModel.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.date}" />
+                                </f:facet>
+                                <h:outputLabel value="#{billDetail.transactionDate}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.description}" />
+                                </f:facet>
+                                <h:outputLabel value="#{billDetail.description}" />
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.cost}" />
+                                </f:facet>
+                                 <h:outputLabel value="#{billDetail.price}" />
+                            </h:column>
+                            
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.removeMedicine}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.removeMedicine}">
+                                            <f:ajax event="click" listener="#{billController.selectBillDescriptionToRemove()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable> <br/><br/>
+                        
+                        <h:outputLabel value="#{Language.valueOf.totalCost} : #{billController.totalPrice}" />
+                        <br/>
+                         <br/>
+                        <h:commandButton value="#{Language.valueOf.payBill }"
+                                         id="payBill" 
+                                         action="#{billController.payBills()}" />
+                       
                     </h:panelGroup>
 
                 </h:form>
