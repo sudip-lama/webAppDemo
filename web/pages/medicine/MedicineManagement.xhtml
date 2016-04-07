@@ -22,10 +22,10 @@
                         <h:message for="medicineName"
                                    styleClass="requiredErrorClass" />
 
-                        <h:outputLabel value="#{Language.valueOf.price}"  />
+                        <h:outputLabel value="#{Language.valueOf.mPrice}"  />
                         <h:inputText value="#{medicineController.medicine.price}"
-                                     id="price" styleClass="required" />
-                        <h:message for="price"
+                                     id="mPrice" styleClass="required" />
+                        <h:message for="mPrice"
                                    styleClass="requiredErrorClass" />
 
                         
@@ -70,26 +70,19 @@
                             </h:column>
                              <h:column>
                                 <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.price}" />
+                                    <h:outputLabel value="#{Language.valueOf.mPrice}" />
                                 </f:facet>
                                  <h:outputLabel value="#{medicine.price}" />
                             </h:column>
 
-                           
-
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputLabel value="#{Language.valueOf.medicineId}" />
-                                </f:facet>
-                                <h:outputLabel value="#{medicine.id}" />
-                            </h:column>
+                         
                            <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{Language.valueOf.edit}"/>
                                     </f:facet>
                                     <center>
                                         <h:commandLink id="editRoleGroup" value="Edit">
-                                            <f:ajax event="click" listener="#{medicineController.getDiseaseForEdit()}" render="@form"/>
+                                            <f:ajax event="click" listener="#{medicineController.getMedicineForEdit()}" render="@form"/>
                                             
                                         </h:commandLink>
                                     </center>

@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:body>
+       <ui:composition template="./../../resources/allMenuTemplate.xhtml">
+            <ui:define name="title">
+                #{Language.valueOf.patientMedicationTitle}
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="patientMedicationManagementForm">
+                    <h:outputLabel value="#{patientMedicineController.message}"/>
+                    <!-- Find patientID -->
+                   
+                    <h:panelGroup>   
+                    <h:panelGrid columns="9">
+                       <h:form id="patientSearchForm">
+                        <h:outputLabel value="#{Language.valueOf.patientId}"  />
+                        <h:inputText value="#{patientMedicineController.patient.id}" id="pId"
+                                     styleClass="required"
+                                    />
+                        <h:message for="pId"
+                                   styleClass="requiredErrorClass" /> 
+                        <h:outputLabel />
+                        <h:outputLabel value="#{Language.valueOf.patientName}"  />
+                        <h:inputText value="#{patientMedicineController.patient.name}" id="pName"
+                                     styleClass="required" />
+                        <h:message for="pName"
+                                   styleClass="requiredErrorClass" />    
+                       <h:outputLabel />
+                         <h:commandButton value="#{Language.valueOf.search}"
+                                          id="search" 
+                         action="#{patientMedicineController.searchPatientByName()}" />
+                       </h:form>
+                        </h:panelGrid>
+                        </h:panelGroup> 
+                    <h:panelGroup> 
+                       <h:panelGrid columns="3">
+
+                        <h:outputLabel value="#{Language.valueOf.medicineName}"  />
+                        <h:selectOneMenu id="medicineName" value="#{patientMedicineController.patientMedication.medicineId}" 
+                                                >
+                            <f:selectItems value="#{patientMedicineController.medicineSelectItemType}" />
+                                   
+                         </h:selectOneMenu>
+                        <h:message for="medicineName"
+                                   styleClass="requiredErrorClass" />
+                        
+                        <h:outputLabel value="#{Language.valueOf.totalQuantity}"  />
+                        <h:inputText value="#{patientMedicineController.patientMedication.medicineQuantity}"
+                                     id="totalQuantity" styleClass="required"  >
+                            
+                        </h:inputText>
+                        <h:message for="totalQuantity"
+                                   styleClass="requiredErrorClass" />
+                      
+                         </h:panelGrid>
+                        </h:panelGroup>
+                   
+                    
+                    <h:panelGrid columns="2" >
+                        <h:outputLabel />
+                        <h:commandButton value="#{Language.valueOf.add }"
+                                         id="submit" 
+                                         action="#{patientMedicineController.addPatienMedication()}" />
+                       
+                    </h:panelGrid>
+                        <br/><br/>
+                    <h:panelGroup >
+                        <h:dataTable id="patientList" var="patient" rows="10"
+                                     border="1"
+                                     rendered="#{patientMedicineController.patientList.size()>0}"  
+                                     value="#{patientMedicineController.patientDataModel}"
+                                 >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.searchedPatient}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientMedicineController.patientDataModel.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientId}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.id}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.name}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.address}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.address}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.phone}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patient.phone}" />
+                            </h:column>
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.add}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.add}">
+                                            <f:ajax event="click" listener="#{patientMedicineController.selectPatientForMedication()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <!-- All Patient Medication List-->
+                    <h:panelGroup rendered="#{patientMedicineController.patientMedicationList.size()>0}">
+                        <h:dataTable id="patientDiagnosisList" var="patientMedication" rows="10"
+                                     border="1"
+                                       
+                                     value="#{patientMedicineController.patientMedicationDataModel}"
+                                 >
+                            <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.allPatientMedicine}" />
+                             </f:facet>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.id}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientMedicineController.patientMedicationDataModel.rowIndex+1}"/>
+                            </h:column>     
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.patientName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientMedicineController.findPatientById(patientMedication.patientId).name}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.medicineName}" />
+                                </f:facet>
+                                <h:outputLabel value="#{patientMedicineController.findMedicineById(patientMedication.medicineId).medicineName}" />
+                            </h:column>
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{Language.valueOf.totalQuantity}" />
+                                </f:facet>
+                                 <h:outputLabel value="#{patientMedication.medicineQuantity}" />
+                            </h:column>
+                            
+                           <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{Language.valueOf.removeMedicine}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:commandLink id="editRoleGroup" value="#{Language.valueOf.removeMedicine}">
+                                            <f:ajax event="click" listener="#{patientMedicineController.selectPatientMedicationToRemove()}" render="@form"/>
+                                            
+                                        </h:commandLink>
+                                    </center>
+                                </h:column>
+                        </h:dataTable> <br/><br/>
+                        
+                        <h:commandButton value="#{Language.valueOf.purchaseMedicine }"
+                                         id="purchaseMedicine" 
+                                         action="#{patientMedicineController.purchaseMedicine()}" />
+                       
+                    </h:panelGroup>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
