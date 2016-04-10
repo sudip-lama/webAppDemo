@@ -115,8 +115,7 @@ public class PatientAdmitController {
                 return null;
             }
             if (admitService.createAdmitRecord(patientAdmit)) {
-                roomList = null;
-                roomSelectItemType = null;
+                
                 message = "Admit  Record Created";
                 patientAdmit = null;
             } else {
@@ -125,8 +124,7 @@ public class PatientAdmitController {
 
         } else {
             if (admitService.updateAdmitRecord(patientAdmit)) {
-                roomList = null;
-                roomSelectItemType = null;
+                
                 message = " Admit Record Updated";
                 patientAdmit = null;
             } else {
@@ -138,6 +136,9 @@ public class PatientAdmitController {
         edit = false;
         patientAdmitList = null;
         patientAdmitDataModel = null;
+        diseaseSelectItemType=null;
+        roomList = null;
+                roomSelectItemType = null;
         return null;
 
     }

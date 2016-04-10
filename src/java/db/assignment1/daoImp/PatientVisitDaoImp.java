@@ -50,8 +50,8 @@ public class PatientVisitDaoImp implements PatientVisitDao{
     @Override
     public List<PatientVisit> getAllPatientVisit() {
        List<PatientVisit> patientVisitList = new ArrayList<>();
-                String sql = "SELECT * FROM PATIENT_VISIT WHERE VISIT_DATE >= CURDATE()"
-                        + " ORDER BY VISIT_DATE ";
+                String sql = "SELECT * FROM PATIENT_VISIT WHERE PAYMENT_STAUS = 0"
+                        + " ORDER BY VISIT_DATE DESC";
                 
                 patientVisitList=jdbcTemplate.query(sql,
                         new RowMapper<PatientVisit>() {

@@ -70,6 +70,7 @@
                         <h:message for="pdiagnosisDate"
                                    styleClass="requiredErrorClass" />
                     </h:panelGrid>
+                    <br/>
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
                         <h:commandButton value="#{patientDiagnosisController.edit? Language.valueOf.update : Language.valueOf.save}"
@@ -78,7 +79,8 @@
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
                                          action="PatientDiagnosisMangementRedirect" />
                     </h:panelGrid>
-                        
+                      <br/>
+                    <br/>  
                     <h:panelGroup >
                         <h:dataTable id="patientList" var="patient" rows="10"
                                      border="1"
@@ -135,6 +137,8 @@
                         </h:dataTable>
                     </h:panelGroup>
                     <!-- Edit Patient Diagnosis Schedule-->
+                    <br/>
+                    <br/>
                     <h:panelGroup >
                         <h:dataTable id="patientDiagnosisList" var="patientDiagnosis" rows="10"
                                      border="1"

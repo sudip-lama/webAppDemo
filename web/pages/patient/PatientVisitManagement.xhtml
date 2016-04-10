@@ -99,7 +99,7 @@
                                    styleClass="requiredErrorClass" />
                         </h:panelGrid>
                     
-                      
+                      <br/>
                     <h:panelGrid columns="3" >
                         <h:outputLabel />
                         <h:commandButton value="#{patientVisitController.edit? Language.valueOf.update : Language.valueOf.save}"
@@ -108,9 +108,10 @@
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
                                          action="patientMangementRedirect" />
                     </h:panelGrid>
-                        
+                        <br/>
+                    <br/>
                     <h:panelGroup >
-                        <h:dataTable id="patientList" var="patient" rows="10"
+                        <h:dataTable id="patientList" var="patient" 
                                      border="1"
                                      rendered="#{patientVisitController.patients.size()>0}"  
                                      value="#{patientVisitController.patientList}"
@@ -165,8 +166,10 @@
                         </h:dataTable>
                     </h:panelGroup>
                     <!-- Edit Patient Visit Schedule-->
+                    <br/>
+                    <br/>
                     <h:panelGroup >
-                        <h:dataTable id="patientVisitList" var="patientVisit" rows="10"
+                        <h:dataTable id="patientVisitList" var="patientVisit" 
                                      border="1"
                                      rendered="#{patientVisitController.patientVisitList.size()>0}"  
                                      value="#{patientVisitController.patientVisitDataModel}"

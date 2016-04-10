@@ -45,9 +45,10 @@
                         <h:commandButton value="#{Language.valueOf.cancel}" id="cancel" immediate="true"
                                          action="roomMangementRedirect" />
                     </h:panelGrid>
-                        
+                        <br/>
+                        <br/>
                     <h:panelGroup >
-                        <h:dataTable id="roomList" var="room" rows="10"
+                        <h:dataTable id="roomList" var="room" 
                                      border="1"
                                      
                                      value="#{roomController.roomList}"
